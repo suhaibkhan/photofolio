@@ -116,6 +116,7 @@ body {
   height: auto !important;
   margin-bottom: 10px;
   cursor: pointer;
+  background-color: #eee;
 }
 
 /* @media (max-width: 1200px) {
