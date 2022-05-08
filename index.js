@@ -63,7 +63,7 @@ function renderImages(tag) {
   var allImages = "";
   imagesObjs.forEach(function (img) {
     if (!tag || img.tags.indexOf(tag) >= 0) {
-      allImages += '<img src="images/photos/' + img.name + '" alt="' + img.name + '">';
+      allImages += '<img loading="lazy" src="images/photos/' + img.name + '" alt="' + img.name + '">';
     }
   });
   $("#photos").html(allImages);
