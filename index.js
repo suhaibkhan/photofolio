@@ -25,7 +25,7 @@ const images = [
   "_DSC2224.jpg",
   "_DSC2225.jpg",
   "_DSC2277.jpg",
-  "DSC2279.jpg",
+  "_DSC2279.jpg",
 ];
 
 function getRandomSize(min, max) {
