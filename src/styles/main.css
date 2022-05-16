@@ -1,0 +1,191 @@
+body,
+html {
+  height: 100%;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+#container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+
+#mobile-header {
+  display: none;
+}
+
+#sidenav {
+  width: 240px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: overlay;
+  background-color: #fff;
+}
+
+#header {
+  width: 100%;
+  text-align: center;
+  padding: 20px 0;
+}
+
+#header img {
+  width: 200px;
+}
+
+#nav {
+  flex: 1;
+}
+
+#nav ul {
+  list-style: none;
+  font-family: 'Cairo', sans-serif;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+#nav li a {
+  cursor: pointer;
+  color: #565656;
+  text-decoration: none;
+}
+
+#nav li a:hover,
+#nav li.active a {
+  color: #060606;
+}
+
+#socialnav {
+  padding: 10px 20px;
+  text-align: center;
+}
+
+#socialnav a {
+  margin: 4px;
+  display: inline-block;
+  opacity: 0.7;
+}
+
+#socialnav a:hover {
+  opacity: 0.92;
+}
+
+#socialnav img {
+  width: 24px;
+}
+
+#tags {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  padding: 0px 20px;
+  margin: 0;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#tags a {
+  cursor: pointer;
+  color: #565656;
+  text-decoration: none;
+  margin: 1px 4px;
+  display: block;
+  flex: none;
+}
+
+#tags a:hover,
+#tags a.active {
+  color: #060606;
+}
+
+#copyfooter {
+  padding: 20px;
+  font-family: 'Cairo', sans-serif;
+  font-size: 0.75rem;
+  line-height: 1.5em;
+  text-align: center;
+  color: #565656;
+}
+
+#image-grid {
+  flex: 1;
+  height: calc(100% - 20px);
+  overflow-y: overlay;
+  margin: 10px;
+}
+
+#image-grid img {
+  cursor: pointer;
+}
+
+/* TODO responsive */
+@media (max-width: 600px) {
+  #container {
+    flex-direction: column;
+  }
+
+  #sidenav {
+    display: none;
+    width: 100%;
+    position: absolute;
+    z-index: 2;
+    top: 70px;
+    height: calc(100% - 70px);
+  }
+
+  #sidenav.show {
+    display: flex;
+  }
+
+  #header {
+    display: none;
+  }
+
+  #mobile-header {
+    display: block;
+    width: 100%;
+    text-align: center;
+    height: 70px;
+  }
+
+  #mobile-header img {
+    width: 170px;
+  }
+
+  .mh-btn {
+    position: absolute;
+    top: 15px;
+    left: 6px;
+    font-size: 40px;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  #mobile-header.opennav #menu-btn {
+    display: none;
+  }
+
+  #mobile-header.opennav #back-btn {
+    display: block;
+  }
+
+  #mobile-header #menu-btn {
+    display: block;
+  }
+
+  #mobile-header #back-btn {
+    display: none;
+  }
+}

@@ -1,0 +1,49 @@
+.pv-container {
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: 99;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background-color: #fff;
+}
+
+.pv-image-container {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  /* width: 100%;
+    height: 100%; */
+  /* width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    margin: 10px; */
+}
+
+.pv-image-container.pv-animate {
+  transition-property: width, height, top, left;
+  transition-duration: 0.5s;
+  transition-timing-function: cubic-bezier(0.08, 0.82, 0.17, 1);
+}
+
+.pv-image-container img {
+  width: 100%;
+  height: 100%;
+  /* object-fit: contain; */
+}
+
+.pv-toolbar {
+  position: absolute;
+  right: 0px;
+  z-index: 101;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.pv-toolbar span {
+  display: block;
+  font-size: 40px;
+  cursor: pointer;
+}
