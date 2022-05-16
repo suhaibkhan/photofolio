@@ -12,6 +12,7 @@ module.exports = merge(common, {
           from: path.resolve(__dirname, './public/images'),
           to: path.resolve(__dirname, './dist/images'),
         },
+        '.nojekyll'
       ],
     }),
   ],
