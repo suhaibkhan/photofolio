@@ -24,9 +24,24 @@ ready(() => {
     },
   });
 
-  onClick(selectById('tags').childNodes, (event) => {
-    const tagVal = event.target && event.target.getAttribute('data-tag');
-    grid.filterImages((img) => !tagVal || img.tags.indexOf(tagVal) >= 0);
+  // filter based on url
+  const locHash = window.location.hash;
+  if (locHash) {
+    const navLinks = selectById('navList').getElementsByTagName('a');
+    const activeLink = Array.prototype.find.call(
+      navLinks,
+      (link) => link.getAttribute('href') === locHash
+    );
+    if (activeLink) {
+      activateNavLink(activeLink);
+    }
+    filterImages(grid, locHash.slice(1));
+  }
+
+  onClick(selectById('navList').getElementsByTagName('a'), (event) => {
+    const tagVal = event.target && event.target.getAttribute('href').slice(1);
+    activateNavLink(event.target);
+    filterImages(grid, tagVal);
     hideSideNav();
   });
 
@@ -60,4 +75,19 @@ function hideSideNav() {
   if (!sideNav || !mobileHeader) return;
   removeClass(sideNav, 'show');
   removeClass(mobileHeader, 'opennav');
+}
+
+function activateNavLink(newLink) {
+  const newActiveLi = newLink.parentNode;
+
+  const liItems = selectById('navList').getElementsByTagName('li');
+  Array.prototype.forEach.call(liItems, (item) => {
+    removeClass(item, 'active');
+  });
+
+  addClass(newActiveLi, 'active');
+}
+
+function filterImages(grid, tagVal) {
+  grid.filterImages((img) => !tagVal || img.tags.indexOf(tagVal) >= 0);
 }
