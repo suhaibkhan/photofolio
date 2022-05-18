@@ -132,11 +132,11 @@ body {
     top: 70px;
     height: calc(100% - 70px);
     transform: translateX(-105%);
-    transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
   }
 
   #sidenav.show {
     transform: none;
+    transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
   }
 
   #header {
