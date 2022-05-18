@@ -43,7 +43,6 @@ body {
 
 #nav {
   flex: 1;
-  padding-top: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,11 +52,12 @@ body {
 #nav ul {
   list-style: none;
   font-family: 'Cairo', sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   text-transform: uppercase;
   padding: 0;
   margin: 0;
   text-align: center;
+  line-height: 1.75em;
 }
 
 #nav li a {
@@ -80,7 +80,7 @@ body {
 }
 
 #socialnav a {
-  margin: 4px;
+  margin: 4px 6px;
   display: inline-block;
   opacity: 0.55;
 }
@@ -116,6 +116,36 @@ body {
 
 #image-grid img {
   cursor: pointer;
+}
+
+#image-grid img:hover {
+  transition: transform 0.3s ease-in-out;
+  transform: scale(1.05);
+}
+
+#image-view .pv-title {
+  font-family: 'Cairo', sans-serif;
+  font-size: 1rem;
+  line-height: 1.3em;
+}
+
+@media (max-height: 600px) {
+  #nav ul {
+    font-size: 0.95rem;
+    line-height: 1.6em;
+  }
+
+  #socialnav {
+    padding: 10px;
+  }
+
+  #socialnav img {
+    width: 24px;
+  }
+
+  #socialnav #instaicon {
+    width: 30px;
+  }
 }
 
 /* TODO responsive */

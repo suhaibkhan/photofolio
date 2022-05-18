@@ -11,7 +11,10 @@ let mobileHeader = null;
 ready(() => {
   selectById('curYear').innerText = new Date().getFullYear();
 
-  const viewer = photoViewer(selectById('image-view'));
+  const viewer = photoViewer(selectById('image-view'), {
+    spacing: 20,
+    titleHolder: 'image-titles',
+  });
 
   const grid = photoGrid(selectById('image-grid'), images, {
     spacing: 10,

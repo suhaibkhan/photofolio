@@ -47,3 +47,12 @@
   font-size: 40px;
   cursor: pointer;
 }
+
+.pv-title {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  text-align: center;
+  padding: 10px;
+  z-index: 101;
+}

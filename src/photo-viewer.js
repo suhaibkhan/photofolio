@@ -1,10 +1,11 @@
 import './styles/photo-viewer.css';
-import { addClass, innerHeight, innerWidth } from './utils';
+import { addClass, innerHeight, innerWidth, selectById } from './utils';
 
 const CSS_CLASSES = {
   container: 'pv-container',
   parent: 'pv-image-container',
   animate: 'pv-animate',
+  title: 'pv-title',
 };
 
 class PhotoViewer {
@@ -13,11 +14,18 @@ class PhotoViewer {
     this.image = null;
     this.imgElem = null;
     this.imgParent = null;
+    this.titleElem = null;
+
     this.options = {
-      spacing: 10,
+      spacing: 0,
       animate: true,
+      showTitle: true,
+      titleHolder: null,
       ...options,
     };
+    this.titleHolder = this.options.titleHolder
+      ? selectById(this.options.titleHolder)
+      : null;
     this.init();
 
     let resizeTimer = null;
@@ -48,6 +56,13 @@ class PhotoViewer {
 
     this.container.appendChild(this.imgParent);
     this.setupToolbar();
+
+    // title
+    if (this.options.showTitle) {
+      this.titleElem = document.createElement('div');
+      this.titleElem.setAttribute('class', CSS_CLASSES.title);
+      this.container.appendChild(this.titleElem);
+    }
   }
 
   setupToolbar() {
@@ -86,6 +101,21 @@ class PhotoViewer {
     this.image = image;
     this.container.style.display = 'block';
     this.imgElem.setAttribute('src', elem.getAttribute('src'));
+
+    if (this.titleElem) {
+      let title = image.title;
+      if (this.titleHolder) {
+        const titleTxtElem = this.titleHolder.querySelector(
+          `div[data-img="${image.name}"]`
+        );
+        if (titleTxtElem && titleTxtElem.innerHTML) {
+          title = titleTxtElem.innerHTML;
+        }
+      }
+      this.titleElem.innerHTML = title || '';
+      this.titleElem.style.display = title ? 'block' : 'none';
+    }
+
     // position to full screen
     this.positionImage();
 
@@ -102,8 +132,9 @@ class PhotoViewer {
 
   positionImage() {
     const spacing = this.options.spacing;
+    const titleHeight = this.titleElem ? this.titleElem.clientHeight : 0;
     const contWidth = innerWidth(this.container) - spacing * 2;
-    const contHeight = innerHeight(this.container) - spacing * 2;
+    const contHeight = innerHeight(this.container) - spacing * 2 - titleHeight;
 
     const contLandscape = contWidth >= contHeight;
     const aspRatio = this.image.height / this.image.width;
@@ -125,6 +156,10 @@ class PhotoViewer {
     this.imgParent.style.height = `${imgHeight}px`;
     this.imgParent.style.top = `${(contHeight - imgHeight) / 2 + spacing}px`;
     this.imgParent.style.left = `${(contWidth - imgWidth) / 2 + spacing}px`;
+    if (this.titleElem) {
+      const titleTop = imgHeight + parseFloat(this.imgParent.style.top);
+      this.titleElem.style.top = `${titleTop}px`;
+    }
   }
 }
 
