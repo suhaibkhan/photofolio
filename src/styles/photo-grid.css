@@ -3,6 +3,7 @@
     position: absolute;
     overflow: hidden;
     z-index: 1;
+    user-select: none;
 }
 
 .pg-image-grid {

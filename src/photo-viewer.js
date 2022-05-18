@@ -71,7 +71,7 @@ class PhotoViewer {
 
     const closeBtn = document.createElement('span');
     closeBtn.setAttribute('class', 'material-symbols-outlined');
-    closeBtn.innerText = 'close';
+    closeBtn.innerHTML = '&#xe5cd;';
 
     const maxBtn = document.createElement('span');
     maxBtn.setAttribute('class', 'material-symbols-outlined');

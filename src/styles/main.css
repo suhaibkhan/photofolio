@@ -35,6 +35,7 @@ body {
   width: 100%;
   text-align: center;
   padding: 10px 0 0 0;
+  user-select: none;
 }
 
 #header img {
@@ -77,6 +78,7 @@ body {
   align-items: center;
   justify-content: center;
   display: flex;
+  user-select: none;
 }
 
 #socialnav a {
@@ -178,6 +180,7 @@ body {
     width: 100%;
     text-align: center;
     height: 70px;
+    user-select: none;
   }
 
   #mobile-header img {
