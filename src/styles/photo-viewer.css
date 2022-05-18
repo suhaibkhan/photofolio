@@ -52,7 +52,7 @@
 
 .pv-title {
   position: absolute;
-  width: 100%;
+  width: calc(100% - 20px);
   left: 0;
   text-align: center;
   padding: 10px;
