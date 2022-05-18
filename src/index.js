@@ -1,6 +1,13 @@
 import './styles/main.css';
 
-import { ready, selectById, onClick, addClass, removeClass } from './utils';
+import {
+  ready,
+  load,
+  selectById,
+  onClick,
+  addClass,
+  removeClass,
+} from './utils';
 import { images } from './image-data';
 import photoGrid from './photo-grid';
 import photoViewer from './photo-viewer';
@@ -8,7 +15,7 @@ import photoViewer from './photo-viewer';
 let sideNav = null;
 let mobileHeader = null;
 
-ready(() => {
+load(() => {
   selectById('curYear').innerText = new Date().getFullYear();
 
   const viewer = photoViewer(selectById('image-view'), {

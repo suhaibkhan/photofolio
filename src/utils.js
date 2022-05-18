@@ -11,6 +11,10 @@ export function ready(callback) {
     });
 }
 
+export function load(callback) {
+  window.addEventListener('load', callback);
+}
+
 export function selectById(id) {
   return document.getElementById(id);
 }
@@ -50,7 +54,10 @@ export function removeClass(elem, className) {
 
   let newClasses = '';
   if (existClasses) {
-    newClasses = existClasses.split(' ').filter(cls => cls !== className).join(' ');
+    newClasses = existClasses
+      .split(' ')
+      .filter((cls) => cls !== className)
+      .join(' ');
   }
   elem.setAttribute('class', newClasses);
 }
