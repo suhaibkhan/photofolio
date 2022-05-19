@@ -7,7 +7,6 @@ export const images = [
     { name: "_DSC2198.jpg", height: 1782, width: 1191, tags: ["georgia", "landscape"] },
     { name: "_DSC2180.jpg", height: 1211, width: 1794, tags: ["georgia", "landscape", "mountains"] },
     { name: "_DSC2148.jpg", height: 1202, width: 1802, tags: ["georgia", "cityscapes"] },
-    { name: "_DSC2086.jpg", height: 1211, width: 1629, tags: ["georgia"] },
     { name: "_DSC2083.jpg", height: 1173, width: 1754, tags: ["georgia"] },
     { name: "_DSC2059.jpg", height: 1210, width: 1815, tags: ["georgia"] },
     { name: "_DSC2045.jpg", height: 1227, width: 1227, tags: ["georgia"] },
