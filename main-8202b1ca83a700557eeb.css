@@ -126,7 +126,7 @@ body {
 }
 
 #image-view .pv-title {
-  font-size: 1rem;
+  font-size: 1.1rem;
   line-height: 1.3em;
 }
 
@@ -209,6 +209,10 @@ body {
 
   #mobile-header #back-btn {
     display: none;
+  }
+
+  #image-view .pv-title {
+    font-size: 1rem;
   }
 }
 
