@@ -140,8 +140,9 @@ class PhotoViewer {
       return;
     }
 
-    // hide title
+    // hide title, remove img
     this.titleElem.style.display = 'none';
+    this.imgElem.removeAttribute('src');
 
     // const containerHeight = innerHeight(this.container);
     // this.imgParent.style.top = `${(next ? -1 : 1) * (containerHeight + 10)}px`;
