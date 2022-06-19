@@ -18,9 +18,9 @@ let mobileHeader = null;
 load(() => {
   selectById('curYear').innerText = new Date().getFullYear();
 
-  const viewer = photoViewer(selectById('image-view'), {
+  const viewer = photoViewer(selectById('image-view'), images, {
     spacing: 20,
-    titleHolder: 'image-titles',
+    titleHolder: 'image-titles'
   });
 
   const grid = photoGrid(selectById('image-grid'), images, {
@@ -29,8 +29,8 @@ load(() => {
       { maxWidth: 800, count: 2 },
       { maxWidth: 1400, count: 3 },
     ],
-    onImageClick: (image, imgElem) => {
-      viewer.open(image, imgElem);
+    onImageClick: (image, imgIdx, imgElem) => {
+      viewer.open(imgIdx, imgElem);
     },
   });
 

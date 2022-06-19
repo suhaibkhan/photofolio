@@ -1,22 +1,29 @@
 import './styles/photo-viewer.css';
-import { addClass, innerHeight, innerWidth, selectById } from './utils';
+import { addClass, innerHeight, innerWidth, removeClass, selectById } from './utils';
 
 const CSS_CLASSES = {
   container: 'pv-container',
   parent: 'pv-image-container',
   animate: 'pv-animate',
   title: 'pv-title',
+  disabled: 'disabled'
 };
 
 class PhotoViewer {
-  constructor(container, options) {
+  constructor(container, images, options) {
     this.container = container;
+    this.images = images;
     this.image = null;
+    this.imageIdx = null;
     this.imgElem = null;
     this.imgParent = null;
     this.titleElem = null;
+    this.nextBtn = null;
+    this.prevBtn = null;
+    this.viewerOpen = false;
 
     this.options = {
+      imgPathPrefix: 'images/photos/',
       spacing: 0,
       animate: true,
       showTitle: true,
@@ -63,6 +70,21 @@ class PhotoViewer {
       this.titleElem.setAttribute('class', CSS_CLASSES.title);
       this.container.appendChild(this.titleElem);
     }
+
+    document.body.addEventListener('keydown', (evt) => {
+      if (!this.viewerOpen) {
+        return;
+      }
+
+      const key = evt.key;
+      if (key === 'ArrowUp' || key === 'ArrowLeft') {
+        evt.preventDefault();
+        this.navigate(false);
+      } else if (key === 'ArrowDown' || key === 'ArrowRight') {
+        evt.preventDefault();
+        this.navigate(true);
+      }
+    });
   }
 
   setupToolbar() {
@@ -73,11 +95,28 @@ class PhotoViewer {
     closeBtn.setAttribute('class', 'material-symbols-outlined');
     closeBtn.innerHTML = '&#xe5cd;';
 
+    const spacer = document.createElement('span');
+    spacer.setAttribute('class', 'spacer');
+
+    const prevBtn = document.createElement('span');
+    prevBtn.setAttribute('class', 'material-symbols-outlined');
+    prevBtn.innerHTML = '&#xe316;';
+    this.prevBtn = prevBtn;
+
+    const nextBtn = document.createElement('span');
+    nextBtn.setAttribute('class', 'material-symbols-outlined');
+    nextBtn.innerHTML = '&#xe313;';
+    this.nextBtn = nextBtn;
+
+
     const maxBtn = document.createElement('span');
     maxBtn.setAttribute('class', 'material-symbols-outlined');
     maxBtn.innerText = 'fullscreen';
 
     toolbar.appendChild(closeBtn);
+    toolbar.appendChild(spacer);
+    toolbar.appendChild(prevBtn);
+    toolbar.appendChild(nextBtn);
     // toolbar.appendChild(maxBtn);
 
     this.container.appendChild(toolbar);
@@ -85,11 +124,58 @@ class PhotoViewer {
     closeBtn.addEventListener('click', () => {
       this.close();
     });
+
+    prevBtn.addEventListener('click', () => {
+      this.navigate(false);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      this.navigate(true);
+    });
   }
 
-  open(image, elem) {
+  navigate(next) {
+    const newImgIdx = this.imageIdx + (next ? 1 : -1);
+    if (newImgIdx < 0 || newImgIdx >= this.images.length) {
+      return;
+    }
+
+    // hide title
+    this.titleElem.style.display = 'none';
+
+    // const containerHeight = innerHeight(this.container);
+    // this.imgParent.style.top = `${(next ? -1 : 1) * (containerHeight + 10)}px`;
+    // setTimeout(() => this.open(newImgIdx, null), 250);
+
+    removeClass(this.imgParent, CSS_CLASSES.animate);
+    this.open(newImgIdx, null);
+  }
+
+  updateNav() {
+    // update nav buttons based on index
+    if (this.imageIdx === 0) {
+      addClass(this.prevBtn, CSS_CLASSES.disabled);
+    } else {
+      removeClass(this.prevBtn, CSS_CLASSES.disabled);
+    }
+
+    if (this.imageIdx === this.images.length - 1) {
+      addClass(this.nextBtn, CSS_CLASSES.disabled);
+    } else {
+      removeClass(this.nextBtn, CSS_CLASSES.disabled);
+    }
+  }
+
+  open(imageIdx, elem) {
+    const { imgPathPrefix, animate } = this.options;
+    this.imageIdx = imageIdx;
+
+    // update nav buttons
+    this.updateNav();
+
+    const image = this.images[imageIdx];
     // set same position as thumb to animate
-    if (this.options.animate) {
+    if (animate && elem) {
       // addClass(this.imgParent, CSS_CLASSES.animate);
       const { x, y, width, height } = elem.getBoundingClientRect();
       this.imgParent.style.width = `${width}px`;
@@ -100,7 +186,7 @@ class PhotoViewer {
 
     this.image = image;
     this.container.style.display = 'block';
-    this.imgElem.setAttribute('src', elem.getAttribute('src'));
+    this.imgElem.setAttribute('src', imgPathPrefix + image.name);
 
     if (this.titleElem) {
       let title = image.title;
@@ -118,16 +204,22 @@ class PhotoViewer {
 
     // position to full screen
     this.positionImage();
-
-    // if (this.options.animate) {
+    this.viewerOpen = true;
+    // if (animate) {
     //   // remove after animation
     //   setTimeout(() => removeClass(this.imgParent, CSS_CLASSES.animate), 1000);
     // }
   }
 
   close() {
+    this.viewerOpen = false;
     this.container.style.display = 'none';
     this.imgElem.removeAttribute('src');
+    
+    // add animation back if removed
+    if (this.options.animate) {
+      addClass(this.imgParent, CSS_CLASSES.animate);
+    }
   }
 
   positionImage() {

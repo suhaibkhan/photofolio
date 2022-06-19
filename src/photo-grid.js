@@ -89,7 +89,7 @@ class PhotoGrid {
 
     const imageClickHandler = this.options.onImageClick;
 
-    this.images.forEach((img) => {
+    this.images.forEach((img, idx) => {
       const imgParentElem = document.createElement('div');
       imgParentElem.setAttribute('class', CSS_CLASSES.item);
 
@@ -98,7 +98,7 @@ class PhotoGrid {
       imgParentElem.appendChild(imgElem);
 
       imgParentElem.addEventListener('click', (event) => {
-        imageClickHandler && imageClickHandler(img, imgElem, event);
+        imageClickHandler && imageClickHandler(img, idx, imgElem, event);
       });
 
       this.imgItems.push(imgParentElem);
