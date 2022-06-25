@@ -45,13 +45,13 @@ load(() => {
     if (activeLink) {
       activateNavLink(activeLink);
     }
-    filterImages(grid, locHash.slice(1));
+    filterImages(grid, viewer, locHash.slice(1));
   }
 
   onClick(selectById('navList').getElementsByTagName('a'), (event) => {
     const tagVal = event.target && event.target.getAttribute('href').slice(1);
     activateNavLink(event.target);
-    filterImages(grid, tagVal);
+    filterImages(grid, viewer, tagVal);
     hideSideNav();
   });
 
@@ -98,6 +98,8 @@ function activateNavLink(newLink) {
   addClass(newActiveLi, 'active');
 }
 
-function filterImages(grid, tagVal) {
-  grid.filterImages((img) => !tagVal || img.tags.indexOf(tagVal) >= 0);
+function filterImages(grid, viewer, tagVal) {
+  const filteredImages = images.filter((img) => !tagVal || img.tags.indexOf(tagVal) >= 0);
+  grid.updateImages(filteredImages);
+  viewer.updateImages(filteredImages);
 }

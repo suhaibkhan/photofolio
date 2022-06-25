@@ -214,6 +214,7 @@ class PhotoViewer {
 
   close() {
     this.viewerOpen = false;
+    this.imageIdx = null;
     this.container.style.display = 'none';
     this.imgElem.removeAttribute('src');
     
@@ -253,6 +254,10 @@ class PhotoViewer {
       const titleTop = imgHeight + parseFloat(this.imgParent.style.top);
       this.titleElem.style.top = `${titleTop}px`;
     }
+  }
+
+  updateImages(newImages) {
+    this.images = newImages;
   }
 }
 

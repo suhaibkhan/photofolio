@@ -72,8 +72,8 @@ class PhotoGrid {
     return 1;
   }
 
-  filterImages(filterFn) {
-    this.images = this.allImages.filter(filterFn);
+  updateImages(newImages) {
+    this.images = newImages;
     this.addImages();
   }
 
