@@ -3,7 +3,6 @@
 Landscape photography portfolio — Dubai, Georgia, Sharjah, Switzerland, Germany.
 
 **Live:** https://suhaibkhan.github.io/photofolio/
-**Instagram:** [@suhaib_s_khan](https://instagram.com/suhaib_s_khan)
 
 ## Stack
 
