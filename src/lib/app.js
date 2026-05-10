@@ -10,6 +10,17 @@ export function imgSrc(base) {
   return base;
 }
 
+export function coverWebp(src) {
+  if (!src) return '';
+  const slash = src.lastIndexOf('/');
+  const dir = slash === -1 ? '' : src.slice(0, slash);
+  const file = slash === -1 ? src : src.slice(slash + 1);
+  const dot = file.lastIndexOf('.');
+  const name = dot === -1 ? file : file.slice(0, dot);
+  const base = dir.replace(/\/photos$/, '/covers');
+  return `${base}/${name}.webp`;
+}
+
 function buildLocationMap(data) {
   return new Map((data.locations || []).map((loc) => [loc.id, loc]));
 }
@@ -324,6 +335,12 @@ export function initThemesList(data) {
     plate.dataset.idx = i;
     plate.setAttribute('role', 'listitem');
 
+    const picture = document.createElement('picture');
+    const webpSource = document.createElement('source');
+    webpSource.type = 'image/webp';
+    webpSource.srcset = coverWebp(photo.src);
+    picture.appendChild(webpSource);
+
     const img = document.createElement('img');
     img.className = 'plate__img';
     img.src = imgSrc(photo.src);
@@ -334,7 +351,8 @@ export function initThemesList(data) {
     img.loading = i < 2 ? 'eager' : 'lazy';
     img.decoding = 'async';
     if (i === 0) img.fetchPriority = 'high';
-    plate.appendChild(img);
+    picture.appendChild(img);
+    plate.appendChild(picture);
 
     const veil = document.createElement('div');
     veil.className = 'plate__veil';
@@ -524,6 +542,12 @@ export function initAtlas(data) {
     tile.className = 'atlas-tile';
     tile.dataset.tile = slot;
 
+    const picture = document.createElement('picture');
+    const webpSource = document.createElement('source');
+    webpSource.type = 'image/webp';
+    webpSource.srcset = coverWebp(entry.photo.src);
+    picture.appendChild(webpSource);
+
     const img = document.createElement('img');
     img.src = imgSrc(entry.photo.src);
     img.sizes = isHero
@@ -535,7 +559,8 @@ export function initAtlas(data) {
     img.loading = i < 2 ? 'eager' : 'lazy';
     img.decoding = 'async';
     if (isHero) img.fetchPriority = 'high';
-    tile.appendChild(img);
+    picture.appendChild(img);
+    tile.appendChild(picture);
 
     const veil = document.createElement('div');
     veil.className = 'atlas-tile__veil';
@@ -751,22 +776,74 @@ export function initGalleryPage(data) {
     countLabelEl.textContent = photos.length === 1 ? 'Photograph' : 'Photographs';
 
     grid.innerHTML = '';
+    if (grid.__imgObserver) {
+      grid.__imgObserver.disconnect();
+      grid.__imgObserver = null;
+    }
     const locationMap = buildLocationMap(data);
     const categoryMap = new Map((data.categories || []).map((c) => [c.id, c]));
 
-    photos.forEach((photo) => {
+    const supportsIO = 'IntersectionObserver' in window;
+    const loadImg = (img) => {
+      if (img.dataset.webp) {
+        const source = img.previousElementSibling;
+        if (source && source.tagName === 'SOURCE') {
+          source.srcset = img.dataset.webp;
+        }
+        delete img.dataset.webp;
+      }
+      if (img.dataset.src) {
+        img.src = img.dataset.src;
+        delete img.dataset.src;
+      }
+    };
+    const imgObserver = supportsIO
+      ? new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              loadImg(entry.target);
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: '300px 0px', threshold: 0.01 })
+      : null;
+    if (imgObserver) grid.__imgObserver = imgObserver;
+
+    photos.forEach((photo, i) => {
       const figure = document.createElement('figure');
-      figure.className = 'gallery-item';
+      figure.className = 'gallery-item is-loading';
+
+      const picture = document.createElement('picture');
+      const webpSource = document.createElement('source');
+      webpSource.type = 'image/webp';
+      picture.appendChild(webpSource);
 
       const img = document.createElement('img');
-      img.src = imgSrc(photo.src);
+      const fullSrc = imgSrc(photo.src);
+      const webpSrc = coverWebp(photo.src);
       img.sizes = '(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 33vw';
       img.alt = photo.title;
       img.width = photo.width;
       img.height = photo.height;
-      img.loading = 'lazy';
       img.decoding = 'async';
-      img.dataset.full = imgSrc(photo.src);
+      const clearPlaceholder = () => figure.classList.remove('is-loading');
+      img.addEventListener('load', clearPlaceholder, { once: true });
+      img.addEventListener('error', clearPlaceholder, { once: true });
+      if (i < 6) {
+        // Prioritise the first batch so above-the-fold paints fast.
+        webpSource.srcset = webpSrc;
+        img.src = fullSrc;
+        img.fetchPriority = 'high';
+      } else if (imgObserver) {
+        img.dataset.webp = webpSrc;
+        img.dataset.src = fullSrc;
+        imgObserver.observe(img);
+      } else {
+        webpSource.srcset = webpSrc;
+        img.loading = 'lazy';
+        img.src = fullSrc;
+      }
+      img.dataset.full = fullSrc;
       img.dataset.title = photo.title || '';
       img.dataset.description = photo.description || '';
 
@@ -788,7 +865,8 @@ export function initGalleryPage(data) {
       const caption = document.createElement('figcaption');
       caption.textContent = photo.title;
 
-      figure.appendChild(img);
+      picture.appendChild(img);
+      figure.appendChild(picture);
       figure.appendChild(caption);
       grid.appendChild(figure);
     });
@@ -900,6 +978,30 @@ export function initLightbox() {
   }
 
   const lbImage = lightbox.querySelector('.lightbox__image');
+  const lbImageWrap = lightbox.querySelector('.lightbox__image-wrap');
+  let lbSpinner = lightbox.querySelector('.lightbox__spinner');
+  if (lbImageWrap && !lbSpinner) {
+    lbSpinner = document.createElement('div');
+    lbSpinner.className = 'lightbox__spinner';
+    lbSpinner.setAttribute('aria-hidden', 'true');
+    lbImageWrap.appendChild(lbSpinner);
+  }
+  let lbLoadingTimer = null;
+  function setLoading(isLoading) {
+    if (!lbImageWrap) return;
+    if (isLoading) {
+      if (lbLoadingTimer) return;
+      lbLoadingTimer = setTimeout(() => {
+        lbImageWrap.classList.add('is-loading');
+        lbLoadingTimer = null;
+      }, 150);
+    } else {
+      if (lbLoadingTimer) { clearTimeout(lbLoadingTimer); lbLoadingTimer = null; }
+      lbImageWrap.classList.remove('is-loading');
+    }
+  }
+  lbImage.addEventListener('load', () => setLoading(false));
+  lbImage.addEventListener('error', () => setLoading(false));
   const elTitle = lightbox.querySelector('.lightbox__title');
   const elDesc = lightbox.querySelector('.lightbox__description');
   const elLoc = lightbox.querySelector('.lightbox__location-text');
@@ -956,7 +1058,13 @@ export function initLightbox() {
   }
 
   function applyImage(img) {
-    lbImage.src = img.dataset.full || img.src;
+    const nextSrc = img.dataset.full || img.src;
+    if (lbImage.src !== nextSrc) {
+      const cached = lbImage.complete && lbImage.naturalWidth > 0 && lbImage.currentSrc === nextSrc;
+      if (!cached) setLoading(true);
+      lbImage.src = nextSrc;
+      if (lbImage.complete && lbImage.naturalWidth > 0) setLoading(false);
+    }
     lbImage.alt = img.alt || '';
 
     const title = img.dataset.title || img.alt || '';
@@ -1030,6 +1138,7 @@ export function initLightbox() {
     setTimeout(() => {
       lightbox.hidden = true;
       lbImage.src = '';
+      setLoading(false);
       lightbox.classList.remove('is-maximized');
       lightbox.classList.remove('is-dark');
       btnMax?.setAttribute('aria-pressed', 'false');

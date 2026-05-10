@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "import:local-photos": "node scripts/import-local-photos.mjs"
+    "import:local-photos": "node scripts/import-local-photos.mjs",
+    "compress:covers": "node scripts/compress-covers.mjs"
   },
   "dependencies": {
     "@ai-sdk/google-vertex": "^4.0.119",
@@ -19,7 +20,8 @@
     "exifr": "^7.1.3",
     "image-size": "^1.1.1",
     "ora": "^9.4.0",
-    "picocolors": "^1.1.1"
+    "picocolors": "^1.1.1",
+    "sharp": "^0.33.5"
   },
   "devDependencies": {
     "vite": "^5.4.10"
