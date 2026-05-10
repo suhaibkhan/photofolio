@@ -1,0 +1,683 @@
+{
+  "locations": [
+    {
+      "id": "dubai",
+      "name": "Dubai",
+      "shortName": "Dubai",
+      "description": "Desert dunes meet soaring skylines"
+    },
+    {
+      "id": "georgia",
+      "name": "Georgia",
+      "shortName": "Georgia",
+      "description": "Ancient peaks and valleys of the Caucasus"
+    },
+    {
+      "id": "sharjah",
+      "name": "Sharjah",
+      "shortName": "Sharjah",
+      "description": "Heritage, light, and coastal beauty"
+    },
+    {
+      "id": "switzerland",
+      "name": "Switzerland",
+      "shortName": "Switzerland",
+      "description": "Alpine grandeur in every season"
+    },
+    {
+      "id": "germany",
+      "name": "Germany",
+      "shortName": "Germany",
+      "description": "Fairytale castles and timeless forests"
+    }
+  ],
+  "categories": [
+    {
+      "id": "mountains",
+      "name": "Mountains",
+      "description": "Peaks, ridges, and alpine vistas"
+    },
+    {
+      "id": "nature",
+      "name": "Nature",
+      "description": "Forests, lakes, and untouched wilderness"
+    },
+    {
+      "id": "cityscapes",
+      "name": "Cityscapes",
+      "description": "Urban skylines and architectural marvels"
+    },
+    {
+      "id": "landscape",
+      "name": "Landscape",
+      "description": "Wide open vistas and sweeping horizons"
+    },
+    {
+      "id": "desert",
+      "name": "Desert",
+      "description": "Endless dunes and golden sands"
+    }
+  ],
+  "photos": [
+    {
+      "title": "Dubai Marina at Dusk",
+      "src": "https://images.unsplash.com/photo-1512453979798-5ea266f8880c",
+      "width": 1600,
+      "height": 1067,
+      "location": "dubai",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": true,
+      "mobileHero": false
+    },
+    {
+      "title": "Burj Khalifa Skyline",
+      "src": "https://images.unsplash.com/photo-1518684079-3c830dcef090",
+      "width": 1600,
+      "height": 1067,
+      "location": "dubai",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Desert Dunes",
+      "src": "https://images.unsplash.com/photo-1451337516015-6b6e9a44a8a3",
+      "width": 1600,
+      "height": 1067,
+      "location": "dubai",
+      "categories": [
+        "desert",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Dubai Frame",
+      "src": "https://images.unsplash.com/photo-1526495124232-a04e1849168c",
+      "width": 1067,
+      "height": 1600,
+      "location": "dubai",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": false,
+      "mobileHero": true
+    },
+    {
+      "title": "Palm Jumeirah Aerial",
+      "src": "https://images.unsplash.com/photo-1580674684081-7617fbf3d745",
+      "width": 1600,
+      "height": 1067,
+      "location": "dubai",
+      "categories": [
+        "cityscapes",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Dubai Creek",
+      "src": "https://images.unsplash.com/photo-1547721064-da6cfb341d50",
+      "width": 1600,
+      "height": 1067,
+      "location": "dubai",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Downtown Dubai Night",
+      "src": "https://images.unsplash.com/photo-1546412414-e1885259563a",
+      "width": 1600,
+      "height": 1067,
+      "location": "dubai",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Dubai Desert Safari",
+      "src": "https://images.unsplash.com/photo-1549944850-84e00be4203b",
+      "width": 1600,
+      "height": 1067,
+      "location": "dubai",
+      "categories": [
+        "desert"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Al Fahidi District",
+      "src": "https://images.unsplash.com/photo-1512632578888-169bbbc64f33",
+      "width": 1600,
+      "height": 1200,
+      "location": "dubai",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Dubai Sunset Panorama",
+      "src": "https://images.unsplash.com/photo-1597659840241-37e2b9c2f55f",
+      "width": 1600,
+      "height": 900,
+      "location": "dubai",
+      "categories": [
+        "cityscapes",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Tbilisi Old Town",
+      "src": "https://images.unsplash.com/photo-1565008576549-57569a49371d",
+      "width": 1600,
+      "height": 1067,
+      "location": "georgia",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": true,
+      "mobileHero": false
+    },
+    {
+      "title": "Kazbegi Mountain",
+      "src": "https://images.unsplash.com/photo-1558638337-66e0c5015d27",
+      "width": 1600,
+      "height": 1067,
+      "location": "georgia",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Gergeti Trinity Church",
+      "src": "https://images.unsplash.com/photo-1596466339788-0454e5279555",
+      "width": 1067,
+      "height": 1600,
+      "location": "georgia",
+      "categories": [
+        "mountains"
+      ],
+      "hero": false,
+      "mobileHero": true
+    },
+    {
+      "title": "Svaneti Towers",
+      "src": "https://images.unsplash.com/photo-1570168007204-dfb528c6958f",
+      "width": 1600,
+      "height": 1067,
+      "location": "georgia",
+      "categories": [
+        "mountains"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Georgian Wine Country",
+      "src": "https://images.unsplash.com/photo-1584646098378-0874589d76b1",
+      "width": 1600,
+      "height": 1200,
+      "location": "georgia",
+      "categories": [
+        "nature",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Batumi Coastline",
+      "src": "https://images.unsplash.com/photo-1593352643017-fa2bfa8340cc",
+      "width": 1600,
+      "height": 1067,
+      "location": "georgia",
+      "categories": [
+        "nature",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Ananuri Fortress",
+      "src": "https://images.unsplash.com/photo-1575385151164-03c707abeca0",
+      "width": 1600,
+      "height": 1067,
+      "location": "georgia",
+      "categories": [
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Caucasus Peaks",
+      "src": "https://images.unsplash.com/photo-1548227786-6c2c53fd33b4",
+      "width": 1600,
+      "height": 1067,
+      "location": "georgia",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Narikala Fortress",
+      "src": "https://images.unsplash.com/photo-1541634710598-3d5e7e5e5c1c",
+      "width": 1600,
+      "height": 1067,
+      "location": "georgia",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Mtskheta Valley",
+      "src": "https://images.unsplash.com/photo-1557157999-ab846e9e2544",
+      "width": 1600,
+      "height": 900,
+      "location": "georgia",
+      "categories": [
+        "landscape",
+        "nature"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Sharjah Mosque",
+      "src": "https://images.unsplash.com/photo-1578895101408-1a36b834405b",
+      "width": 1600,
+      "height": 1067,
+      "location": "sharjah",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": true,
+      "mobileHero": false
+    },
+    {
+      "title": "Sharjah Heritage Area",
+      "src": "https://images.unsplash.com/photo-1581252165777-1f79b777289f",
+      "width": 1600,
+      "height": 1067,
+      "location": "sharjah",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Al Noor Island",
+      "src": "https://images.unsplash.com/photo-1554939437-ecc492c67b78",
+      "width": 1600,
+      "height": 1067,
+      "location": "sharjah",
+      "categories": [
+        "nature"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Sharjah Corniche",
+      "src": "https://images.unsplash.com/photo-1512100356356-de1b84283e18",
+      "width": 1600,
+      "height": 1200,
+      "location": "sharjah",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Rain Room Sharjah",
+      "src": "https://images.unsplash.com/photo-1534274988757-a28bf1a57c17",
+      "width": 1067,
+      "height": 1600,
+      "location": "sharjah",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": false,
+      "mobileHero": true
+    },
+    {
+      "title": "Sharjah Light Festival",
+      "src": "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf",
+      "width": 1600,
+      "height": 1067,
+      "location": "sharjah",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Al Majaz Waterfront",
+      "src": "https://images.unsplash.com/photo-1517760444937-f6397edcbbcd",
+      "width": 1600,
+      "height": 1067,
+      "location": "sharjah",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Sharjah Desert",
+      "src": "https://images.unsplash.com/photo-1509316785289-025f5b846b35",
+      "width": 1600,
+      "height": 1067,
+      "location": "sharjah",
+      "categories": [
+        "desert",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Sharjah Museum",
+      "src": "https://images.unsplash.com/photo-1518998053901-5348d3961a04",
+      "width": 1600,
+      "height": 1067,
+      "location": "sharjah",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Sharjah Lagoon",
+      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
+      "width": 1600,
+      "height": 1067,
+      "location": "sharjah",
+      "categories": [
+        "nature",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Swiss Alps Panorama",
+      "src": "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99",
+      "width": 1600,
+      "height": 1067,
+      "location": "switzerland",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": true,
+      "mobileHero": false
+    },
+    {
+      "title": "Lake Lucerne",
+      "src": "https://images.unsplash.com/photo-1527668752968-14dc70a27c95",
+      "width": 1600,
+      "height": 1067,
+      "location": "switzerland",
+      "categories": [
+        "nature",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Matterhorn Peak",
+      "src": "https://images.unsplash.com/photo-1531400158697-004a1e14e48e",
+      "width": 1067,
+      "height": 1600,
+      "location": "switzerland",
+      "categories": [
+        "mountains"
+      ],
+      "hero": false,
+      "mobileHero": true
+    },
+    {
+      "title": "Lauterbrunnen Valley",
+      "src": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
+      "width": 1600,
+      "height": 1067,
+      "location": "switzerland",
+      "categories": [
+        "mountains",
+        "nature"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Swiss Train Journey",
+      "src": "https://images.unsplash.com/photo-1544085311-11a028465b03",
+      "width": 1600,
+      "height": 1200,
+      "location": "switzerland",
+      "categories": [
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Lake Geneva",
+      "src": "https://images.unsplash.com/photo-1504218727796-db522606b16f",
+      "width": 1600,
+      "height": 1067,
+      "location": "switzerland",
+      "categories": [
+        "nature",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Grindelwald Village",
+      "src": "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1",
+      "width": 1600,
+      "height": 1067,
+      "location": "switzerland",
+      "categories": [
+        "mountains",
+        "nature"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Jungfrau Region",
+      "src": "https://images.unsplash.com/photo-1508004526072-42fea6a73c8b",
+      "width": 1600,
+      "height": 1067,
+      "location": "switzerland",
+      "categories": [
+        "mountains"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Zurich Old Town",
+      "src": "https://images.unsplash.com/photo-1515488764276-beab7607c1e6",
+      "width": 1600,
+      "height": 1067,
+      "location": "switzerland",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Swiss Countryside",
+      "src": "https://images.unsplash.com/photo-1500514966906-fe245eea9344",
+      "width": 1600,
+      "height": 900,
+      "location": "switzerland",
+      "categories": [
+        "nature",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Neuschwanstein Castle",
+      "src": "https://images.unsplash.com/photo-1467269204594-9661b134dd2b",
+      "width": 1600,
+      "height": 1067,
+      "location": "germany",
+      "categories": [
+        "landscape"
+      ],
+      "hero": true,
+      "mobileHero": false
+    },
+    {
+      "title": "Black Forest",
+      "src": "https://images.unsplash.com/photo-1516483638261-f4dbaf036963",
+      "width": 1600,
+      "height": 1067,
+      "location": "germany",
+      "categories": [
+        "nature"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Rhine Valley",
+      "src": "https://images.unsplash.com/photo-1534313314376-a72289b6181e",
+      "width": 1600,
+      "height": 1067,
+      "location": "germany",
+      "categories": [
+        "nature",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Bavarian Alps",
+      "src": "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800",
+      "width": 1600,
+      "height": 1200,
+      "location": "germany",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Cologne Cathedral",
+      "src": "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad",
+      "width": 1067,
+      "height": 1600,
+      "location": "germany",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": false,
+      "mobileHero": true
+    },
+    {
+      "title": "Saxon Switzerland",
+      "src": "https://images.unsplash.com/photo-1527004013197-933c4bb611b3",
+      "width": 1600,
+      "height": 1067,
+      "location": "germany",
+      "categories": [
+        "mountains",
+        "nature"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Hamburg Harbor",
+      "src": "https://images.unsplash.com/photo-1504297050568-910d24c426d3",
+      "width": 1600,
+      "height": 1067,
+      "location": "germany",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Zugspitze Summit",
+      "src": "https://images.unsplash.com/photo-1491555103944-7c647fd857e6",
+      "width": 1600,
+      "height": 1067,
+      "location": "germany",
+      "categories": [
+        "mountains"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Brandenburg Gate",
+      "src": "https://images.unsplash.com/photo-1560969184-10fe8719e047",
+      "width": 1600,
+      "height": 1067,
+      "location": "germany",
+      "categories": [
+        "cityscapes"
+      ],
+      "hero": false,
+      "mobileHero": false
+    },
+    {
+      "title": "Romantic Road",
+      "src": "https://images.unsplash.com/photo-1473615695634-d284ec918736",
+      "width": 1600,
+      "height": 900,
+      "location": "germany",
+      "categories": [
+        "nature",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false
+    }
+  ]
+}

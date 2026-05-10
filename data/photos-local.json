@@ -1,0 +1,1007 @@
+{
+  "locations": [
+    {
+      "id": "dubai",
+      "name": "Dubai, United Arab Emirates",
+      "shortName": "Dubai",
+      "description": "Desert dunes meet soaring skylines",
+      "cover": "images/photos/_DSC0791.jpg"
+    },
+    {
+      "name": "Switzerland",
+      "shortName": "Switzerland",
+      "id": "switzerland",
+      "description": "Pristine Alpine peaks and crystal lakes meet the charm of emerald valleys",
+      "cover": "images/photos/DSC00760.jpg"
+    },
+    {
+      "name": "Georgia",
+      "shortName": "Georgia",
+      "id": "georgia",
+      "description": "Snow-capped Caucasus peaks and ancient vineyards meet the cobblestones of timeless villages",
+      "cover": "images/photos/_DSC2148.jpg"
+    },
+    {
+      "id": "sharjah",
+      "name": "Sharjah, United Arab Emirates",
+      "shortName": "Sharjah",
+      "description": "The cultural capital where heritage meets the lagoon",
+      "cover": "images/photos/_DSC1077.jpg"
+    },
+    {
+      "name": "Germany",
+      "shortName": "Germany",
+      "id": "germany",
+      "description": "Fairytale forests and medieval castles meet the precision of modern cityscapes and the snow-capped Alps",
+      "cover": "images/photos/DSC01654.jpg"
+    },
+    {
+      "name": "Jordan",
+      "shortName": "Jordan",
+      "id": "jordan",
+      "description": "Ancient Nabataean rose cities and Martian desert dunes meet the salt-rich shores of the Dead Sea",
+      "cover": "images/photos/DSCF0306.jpg"
+    }
+  ],
+  "categories": [
+    {
+      "id": "mountains",
+      "name": "Mountains",
+      "description": "Peaks, ridges, and alpine vistas",
+      "cover": "images/photos/DSC02188.jpg"
+    },
+    {
+      "id": "landscape",
+      "name": "Landscape",
+      "description": "Wide open vistas and sweeping horizons",
+      "cover": "images/photos/DSC00980.jpg"
+    },
+    {
+      "name": "Cityscape",
+      "id": "cityscape",
+      "description": "Urban skylines and architectural marvels",
+      "cover": "images/photos/_DSC0842.jpg"
+    },
+    {
+      "name": "Nature",
+      "id": "nature",
+      "description": "Forests, lakes, and untouched wilderness",
+      "cover": "images/photos/DSC01949.jpg"
+    },
+    {
+      "name": "Desert",
+      "id": "desert",
+      "description": "Endless dunes and golden sands",
+      "cover": "images/photos/DSCF0493.jpg"
+    }
+  ],
+  "photos": [
+    {
+      "title": "The Rugged Peaks of Hatta Dam",
+      "description": "Jagged reddish peaks meet the tranquil teal waters of the Hatta Dam reservoir. The Hajar Mountains stand tall under a vast, cloudless sky.",
+      "src": "images/photos/_DSC0519.jpg",
+      "width": 1533,
+      "height": 1917,
+      "location": "dubai",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/14",
+        "shutterSpeed": "1/100s",
+        "focalLength": "30mm"
+      }
+    },
+    {
+      "title": "Journey Along Sharjah Maleha Road",
+      "description": "The Sharjah Maleha Road cuts through a vast, arid landscape under the shadow of the Hajar Mountains. A single road sign marks the path forward into the rugged desert terrain.",
+      "src": "images/photos/_DSC0528.jpg",
+      "width": 919,
+      "height": 1149,
+      "location": "sharjah",
+      "categories": [
+        "mountains"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/10",
+        "shutterSpeed": "1/320s",
+        "focalLength": "30mm"
+      }
+    },
+    {
+      "title": "Twilight Glow over Dubai Creek Harbour",
+      "description": "A vibrant violet and golden gradient washes over the iconic skyline as the sun sets behind the palms. The city's silhouette is mirrored perfectly in the calm waters of the harbour.",
+      "src": "images/photos/_DSC0777.jpg",
+      "width": 2085,
+      "height": 1371,
+      "location": "dubai",
+      "categories": [
+        "cityscape"
+      ],
+      "hero": false,
+      "mobileHero": true,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/10",
+        "shutterSpeed": "1/20s",
+        "focalLength": "18mm"
+      }
+    },
+    {
+      "title": "Dusky Skies Over the Dubai Horizon",
+      "description": "A fiery sun descends behind the iconic spires of Dubai, painting the sky in gradients of orange and lavender. The city's silhouette stands sharp against the fading light.",
+      "src": "images/photos/_DSC0791.jpg",
+      "width": 1840,
+      "height": 1166,
+      "location": "dubai",
+      "categories": [
+        "cityscape"
+      ],
+      "hero": true,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/8",
+        "shutterSpeed": "1/125s",
+        "focalLength": "87mm"
+      }
+    },
+    {
+      "title": "Sunset Silhouettes at Dubai Creek",
+      "description": "Towering palms stand in sharp relief against a soft gradient of pink and indigo over the water. Geometric lines of the promenade lead the eye toward the hazy silhouette of the distant Dubai skyline.",
+      "src": "images/photos/_DSC0812.jpg",
+      "width": 1483,
+      "height": 2264,
+      "location": "dubai",
+      "categories": [
+        "cityscape"
+      ],
+      "hero": false,
+      "mobileHero": true,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/5.6",
+        "shutterSpeed": "1/50s",
+        "focalLength": "27mm"
+      }
+    },
+    {
+      "title": "Dubai Skyline from Dubai Creek Harbour",
+      "description": "The illuminated Dubai skyline stretches across the horizon, casting vibrant reflections onto the still waters of the Creek Harbour. A long exposure captures the city's electric energy beneath a deep indigo sky.",
+      "src": "images/photos/_DSC0842.jpg",
+      "width": 1818,
+      "height": 1212,
+      "location": "dubai",
+      "categories": [
+        "cityscape"
+      ],
+      "hero": true,
+      "mobileHero": true,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/16",
+        "shutterSpeed": "25s",
+        "focalLength": "39mm"
+      }
+    },
+    {
+      "title": "Intricate Patterns in the Butterfly Garden",
+      "description": "A butterfly displays its intricate eyespots while resting on sun-drenched leaves in Sharjah. This delicate moment captures the quiet elegance of the Al Noor Island Butterfly Garden.",
+      "src": "images/photos/_DSC0903.jpg",
+      "width": 1227,
+      "height": 1840,
+      "location": "sharjah",
+      "categories": [
+        "nature"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 640,
+        "aperture": "f/5.6",
+        "shutterSpeed": "1/20s",
+        "focalLength": "92mm"
+      }
+    },
+    {
+      "title": "Urban Escape on Al Noor Island",
+      "description": "A wooden walkway winds through lush coastal greenery, framing a serene view of Sharjah’s soaring skyline across the water.",
+      "src": "images/photos/_DSC0931.jpg",
+      "width": 1152,
+      "height": 1727,
+      "location": "sharjah",
+      "categories": [
+        "cityscape",
+        "nature"
+      ],
+      "hero": false,
+      "mobileHero": true,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/3.5",
+        "shutterSpeed": "1/40s",
+        "focalLength": "18mm"
+      }
+    },
+    {
+      "title": "Serene Moments on Al Noor Island",
+      "description": "A wooden boardwalk winds through the lush, verdant sanctuary of Sharjah’s Al Noor Island. Dappled sunlight filters through the canopy as a wanderer reaches toward the hanging vines.",
+      "src": "images/photos/_DSC0955.jpg",
+      "width": 1227,
+      "height": 1533,
+      "location": "sharjah",
+      "categories": [
+        "nature"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 250,
+        "aperture": "f/3.5",
+        "shutterSpeed": "1/40s",
+        "focalLength": "18mm"
+      }
+    },
+    {
+      "title": "The Sharjah Skyline at Twilight",
+      "description": "Captured from the shores of Al Noor Island, this long exposure smooths the bay into a mirror for the Sharjah skyline. The dusk sky paints the urban horizon in soft, ethereal tones.",
+      "src": "images/photos/_DSC1077.jpg",
+      "width": 1800,
+      "height": 1095,
+      "location": "sharjah",
+      "categories": [
+        "cityscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/8",
+        "shutterSpeed": "5s",
+        "focalLength": "29mm"
+      }
+    },
+    {
+      "title": "Midnight Glow of the JVC Skyline",
+      "description": "A long exposure captures the luminous tapestry of Jumeirah Village Circle against a deep violet sky. Golden streetlights and glowing windows reveal the architectural pulse of midnight Dubai.",
+      "src": "images/photos/_DSC1139.jpg",
+      "width": 1112,
+      "height": 1112,
+      "location": "dubai",
+      "categories": [
+        "cityscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/8",
+        "shutterSpeed": "8s",
+        "focalLength": "35mm"
+      }
+    },
+    {
+      "title": "Luminous Heights of Jumeirah Village",
+      "description": "Golden lights and violet skies frame the modern architecture of Jumeirah Village Circle. This long exposure captures the quiet energy of Dubai’s residential heart under a deep twilight canopy.",
+      "src": "images/photos/_DSC1144.jpg",
+      "width": 1742,
+      "height": 1227,
+      "location": "dubai",
+      "categories": [
+        "cityscape"
+      ],
+      "hero": true,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/8",
+        "shutterSpeed": "10s",
+        "focalLength": "42mm"
+      }
+    },
+    {
+      "title": "Monochrome Sunset over Dubai",
+      "description": "The sun glows like a bright orb as it dips behind the sharp, silhouetted architecture of Dubai. A minimalist black and white study of light and industrial structure.",
+      "src": "images/photos/_DSC1341.jpg",
+      "width": 1840,
+      "height": 1096,
+      "location": "dubai",
+      "categories": [
+        "cityscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 400,
+        "aperture": "f/8",
+        "shutterSpeed": "1/200s",
+        "focalLength": "135mm"
+      }
+    },
+    {
+      "title": "Vibrant Night at the Japan Pavilion",
+      "description": "Illuminated by golden lights, this colorful tribute to Eastern culture shines at Dubai’s Global Village. A massive decorative fan and traditional red gate welcome visitors under the night sky.",
+      "src": "images/photos/_DSC1356.jpg",
+      "width": 1840,
+      "height": 1227,
+      "location": "dubai",
+      "categories": [
+        "cityscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/1.4",
+        "shutterSpeed": "1/30s",
+        "focalLength": "30mm"
+      }
+    },
+    {
+      "title": "Golden Lights of the India Pavilion",
+      "description": "Warm golden light spills from the intricate facade of the India Pavilion, reflected in the shimmering spray of a colorful fountain. This vibrant night scene captures the spirit of Dubai’s Global Village.",
+      "src": "images/photos/_DSC1360.jpg",
+      "width": 1544,
+      "height": 1138,
+      "location": "dubai",
+      "categories": [
+        "cityscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/2",
+        "shutterSpeed": "1/40s",
+        "focalLength": "30mm"
+      }
+    },
+    {
+      "title": "Vibrant Night at the Africa Pavilion",
+      "description": "Radiant neon and warm spotlights illuminate the intricate murals and carvings of the Africa Pavilion. This architectural mosaic brings a burst of cultural artistry to the night in Dubai.",
+      "src": "images/photos/_DSC1364.jpg",
+      "width": 1840,
+      "height": 1227,
+      "location": "dubai",
+      "categories": [
+        "cityscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/1.6",
+        "shutterSpeed": "1/40s",
+        "focalLength": "30mm"
+      }
+    },
+    {
+      "title": "The Confluence of Ancient Rivers",
+      "description": "From the heights of Jvari Monastery, the Mtkvari and Aragvi rivers merge beside the historic town of Mtskheta. Lush green mountains cradle the valley under a soft canopy of clouds.",
+      "src": "images/photos/_DSC2045.jpg",
+      "width": 1227,
+      "height": 1227,
+      "location": "georgia",
+      "categories": [
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/7.1",
+        "shutterSpeed": "1/160s",
+        "focalLength": "18mm"
+      }
+    },
+    {
+      "title": "Emerald Ridges of the Georgia Mountains",
+      "description": "Lush green slopes rise sharply under a soft, overcast sky near Mtskheta. The rugged, textured terrain highlights the timeless beauty of the Georgian wilderness.",
+      "src": "images/photos/_DSC2059.jpg",
+      "width": 1815,
+      "height": 1210,
+      "location": "georgia",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/7.1",
+        "shutterSpeed": "1/160s",
+        "focalLength": "64mm"
+      }
+    },
+    {
+      "title": "The Sacred Heights of Jvari Monastery",
+      "description": "Perched atop a vibrant green peak, the ancient Jvari Monastery stands as a silent sentinel beneath a dramatic sky. This historic stone sanctuary captures the enduring spirit of the Georgian highlands.",
+      "src": "images/photos/_DSC2083.jpg",
+      "width": 1754,
+      "height": 1173,
+      "location": "georgia",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/6.3",
+        "shutterSpeed": "1/200s",
+        "focalLength": "88mm"
+      }
+    },
+    {
+      "title": "The Sprawling Red Roofs of Tbilisi",
+      "description": "A tapestry of historic architecture and modern landmarks unfolds along the winding Kura River. Soft, overcast light settles over the city's layered horizons and distant mountains.",
+      "src": "images/photos/_DSC2148.jpg",
+      "width": 1802,
+      "height": 1202,
+      "location": "georgia",
+      "categories": [
+        "cityscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/5",
+        "shutterSpeed": "1/125s",
+        "focalLength": "22mm"
+      }
+    },
+    {
+      "title": "Serene Ridges Over Zhinvali Reservoir",
+      "description": "Lush green mountains frame the winding waters of the Zhinvali Reservoir under a dramatic sky. Soft mist clings to distant peaks, highlighting the rugged beauty of the Georgian highlands.",
+      "src": "images/photos/_DSC2180.jpg",
+      "width": 1794,
+      "height": 1211,
+      "location": "georgia",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/7.1",
+        "shutterSpeed": "1/320s",
+        "focalLength": "78mm"
+      }
+    },
+    {
+      "title": "Historic Stone Spires of Ananuri",
+      "description": "Weathered stone spires and terracotta roofs overlook a winding riverbed in the heart of Georgia. Lush green mountains rise toward a soft sky, framing centuries of history.",
+      "src": "images/photos/_DSC2198.jpg",
+      "width": 1191,
+      "height": 1782,
+      "location": "georgia",
+      "categories": [
+        "nature"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/5.6",
+        "shutterSpeed": "1/640s",
+        "focalLength": "18mm"
+      }
+    },
+    {
+      "title": "Late Snow in the Caucasus Mountains",
+      "description": "Dramatic clouds drift over the jagged peaks of Gudauri. Melting snow patterns the steep mountain faces, revealing the raw textures of the Great Caucasus range.",
+      "src": "images/photos/_DSC2224.jpg",
+      "width": 1840,
+      "height": 1227,
+      "location": "georgia",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": true,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/8",
+        "shutterSpeed": "1/250s",
+        "focalLength": "18mm"
+      }
+    },
+    {
+      "title": "High Peaks Over the Caucasus Valley",
+      "description": "Layers of snow-flecked peaks and emerald slopes unfold beneath a heavy mountain sky in Gudauri. The rugged terrain of the Caucasus Mountains stretches toward the horizon.",
+      "src": "images/photos/_DSC2225.jpg",
+      "width": 1813,
+      "height": 1121,
+      "location": "georgia",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/8",
+        "shutterSpeed": "1/250s",
+        "focalLength": "27mm"
+      }
+    },
+    {
+      "title": "Spring Thaw in the Caucasus Mountains",
+      "description": "Crisp mountain air sweeps over the verdant slopes of Kazbegi, where melting snow carves paths along the ridges. Beyond the green foothills, the towering peaks of the Caucasus reach into the clouds.",
+      "src": "images/photos/_DSC2277.jpg",
+      "width": 1776,
+      "height": 1213,
+      "location": "georgia",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": true,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/7.1",
+        "shutterSpeed": "1/500s",
+        "focalLength": "59mm"
+      }
+    },
+    {
+      "title": "Majestic Peaks of the Georgian Caucasus",
+      "description": "The snow-dusted summit of Mount Kazbek towers over the verdant slopes of the Caucasus Range. White clouds dance around the jagged peaks above the winding mountain passes of Georgia.",
+      "src": "images/photos/_DSC2279.jpg",
+      "width": 1837,
+      "height": 1225,
+      "location": "georgia",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": true,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-6400",
+        "iso": 100,
+        "aperture": "f/7.1",
+        "shutterSpeed": "1/500s",
+        "focalLength": "27mm"
+      }
+    },
+    {
+      "title": "Golden Light Over Lake Brienz",
+      "description": "Sunbeams break through the haze to illuminate the vibrant turquoise waters of Lake Brienz. A quiet alpine cabin sits nestled among verdant trees and rugged mountain slopes.",
+      "src": "images/photos/DSC00635-Edit.jpg",
+      "width": 1638,
+      "height": 2048,
+      "location": "switzerland",
+      "categories": [
+        "mountains",
+        "landscape",
+        "nature"
+      ],
+      "hero": false,
+      "mobileHero": true,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 200,
+        "aperture": "f/13",
+        "shutterSpeed": "1/400s",
+        "focalLength": "24mm"
+      }
+    },
+    {
+      "title": "Cascading Falls Above Lake Brienz",
+      "description": "Glacial waters crash down rocky cliffs into the striking blue depths of Lake Brienz. Sunlight filters through the canopy, illuminating the mist of this powerful Swiss cascade.",
+      "src": "images/photos/DSC00667.jpg",
+      "width": 4516,
+      "height": 6926,
+      "location": "switzerland",
+      "categories": [
+        "landscape",
+        "nature"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 100,
+        "aperture": "f/9",
+        "shutterSpeed": "1/200s",
+        "focalLength": "73mm"
+      }
+    },
+    {
+      "title": "Vintage Steamship Across Lake Brienz",
+      "description": "The historic Lötschberg cuts through the emerald ripples of Lake Brienz, framed by the deep greens of the Swiss alpine forest.",
+      "src": "images/photos/DSC00682.jpg",
+      "width": 2048,
+      "height": 1638,
+      "location": "switzerland",
+      "categories": [
+        "nature"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 100,
+        "aperture": "f/9",
+        "shutterSpeed": "1/200s",
+        "focalLength": "77mm"
+      }
+    },
+    {
+      "title": "Golden Light Over the Swiss Alps",
+      "description": "Sunlight breaks through soft clouds to illuminate the layered peaks and tranquil waters above Interlaken. Dense pine forests give way to misty valleys in this serene mountain landscape.",
+      "src": "images/photos/DSC00717.jpg",
+      "width": 2048,
+      "height": 1365,
+      "location": "switzerland",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": true,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 100,
+        "aperture": "f/9",
+        "shutterSpeed": "1/200s",
+        "focalLength": "82mm"
+      }
+    },
+    {
+      "title": "Mountain Grandeur Above Wengen",
+      "description": "Traditional Swiss chalets rest on a vibrant green hillside, framed by the towering, snow-dusted peaks of the Bernese Alps.",
+      "src": "images/photos/DSC00760.jpg",
+      "width": 2048,
+      "height": 1365,
+      "location": "switzerland",
+      "categories": [
+        "mountains",
+        "landscape",
+        "nature"
+      ],
+      "hero": true,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 250,
+        "aperture": "f/9",
+        "shutterSpeed": "1/50s",
+        "focalLength": "105mm"
+      }
+    },
+    {
+      "title": "Frozen Grandeur at Jungfraujoch",
+      "description": "Billowing clouds crown the jagged peaks of the Swiss Alps, overlooking the vast expanse of the Aletsch Glacier. From the Top of Europe, the crisp mountain air meets an endless horizon of snow and stone.",
+      "src": "images/photos/DSC00841.jpg",
+      "width": 2048,
+      "height": 1434,
+      "location": "switzerland",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 200,
+        "aperture": "f/10",
+        "shutterSpeed": "1/1250s",
+        "focalLength": "34mm"
+      }
+    },
+    {
+      "title": "The Frozen Crown of the Jungfrau",
+      "description": "Sharp granite ridges pierce through blankets of pristine snow at the Jungfraujoch. This high-altitude vista captures the silent majesty of the Swiss Alps under a brilliant sky.",
+      "src": "images/photos/DSC00844.jpg",
+      "width": 2048,
+      "height": 1407,
+      "location": "switzerland",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": true,
+      "mobileHero": true,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 200,
+        "aperture": "f/10",
+        "shutterSpeed": "1/1250s",
+        "focalLength": "24mm"
+      }
+    },
+    {
+      "title": "Lauterbrunnen Valley in the Swiss Alps",
+      "description": "Golden light illuminates the sheer cliffs and cascading waterfalls of Lauterbrunnen as seen from the village of Wengen. Snow-dusted peaks watch over the verdant valley below.",
+      "src": "images/photos/DSC00978.jpg",
+      "width": 1365,
+      "height": 2048,
+      "location": "switzerland",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": true,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 200,
+        "aperture": "f/9",
+        "shutterSpeed": "1/80s",
+        "focalLength": "44mm"
+      }
+    },
+    {
+      "title": "Sunlight Over the Lauterbrunnen Valley",
+      "description": "Sunlight illuminates the sheer cliffs of Lauterbrunnen, where waterfalls cascade into the verdant valley below. Snow-dusted peaks stand guard over traditional chalets nestled in the Swiss alpine landscape.",
+      "src": "images/photos/DSC00980.jpg",
+      "width": 2048,
+      "height": 1358,
+      "location": "switzerland",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 200,
+        "aperture": "f/9",
+        "shutterSpeed": "1/80s",
+        "focalLength": "26mm"
+      }
+    },
+    {
+      "title": "The Historic Chapel Bridge of Lucerne",
+      "description": "Sunlight dances across the Reuss river, illuminating the medieval Chapel Bridge and its iconic water tower against a backdrop of rolling alpine peaks.",
+      "src": "images/photos/DSC01240.jpg",
+      "width": 2048,
+      "height": 1072,
+      "location": "switzerland",
+      "categories": [
+        "cityscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 100,
+        "aperture": "f/11",
+        "shutterSpeed": "1/160s",
+        "focalLength": "33mm"
+      }
+    },
+    {
+      "title": "Timeless Elegance of Lucerne",
+      "description": "Golden afternoon light illuminates the intricate facade and pointed turrets of a historic street in Lucerne. Flowering balconies and old-world charm define this quintessential Swiss scene.",
+      "src": "images/photos/DSC01272.jpg",
+      "width": 1254,
+      "height": 2048,
+      "location": "switzerland",
+      "categories": [
+        "cityscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 100,
+        "aperture": "f/10",
+        "shutterSpeed": "1/80s",
+        "focalLength": "29mm"
+      }
+    },
+    {
+      "title": "Autumn Hues Over Lake Chiemsee",
+      "description": "Sailboats rest on the mirrored surface of Lake Chiemsee, framed by the vibrant red leaves of autumn. The Bavarian Alps rise softly in the distance under a pale, tranquil sky.",
+      "src": "images/photos/DSC01654.jpg",
+      "width": 2048,
+      "height": 1150,
+      "location": "germany",
+      "categories": [
+        "landscape",
+        "nature"
+      ],
+      "hero": true,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 160,
+        "aperture": "f/8",
+        "shutterSpeed": "1/160s",
+        "focalLength": "24mm"
+      }
+    },
+    {
+      "title": "Autumn Reflections on Hintersee",
+      "description": "Golden autumn hues emerge from a deep green forest, perfectly mirrored in the glassy surface of Lake Hintersee.",
+      "src": "images/photos/DSC01949.jpg",
+      "width": 2048,
+      "height": 1060,
+      "location": "germany",
+      "categories": [
+        "landscape",
+        "nature"
+      ],
+      "hero": true,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 160,
+        "aperture": "f/8",
+        "shutterSpeed": "1/100s",
+        "focalLength": "49mm"
+      }
+    },
+    {
+      "title": "Golden Autumn Transitions in the Alps",
+      "description": "The emerald waters of Hintersee mirror the vibrant gold and crimson foliage of the Bavarian Alps. Snow-dusted peaks rise above the dense forest during this serene seasonal shift.",
+      "src": "images/photos/DSC01960.jpg",
+      "width": 2048,
+      "height": 1235,
+      "location": "germany",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 160,
+        "aperture": "f/8",
+        "shutterSpeed": "1/100s",
+        "focalLength": "51mm"
+      }
+    },
+    {
+      "title": "Autumn Serenity in the Bavarian Alps",
+      "description": "Golden foliage frames the iconic Parish Church of St. Sebastian as glacial waters rush through the valley of Ramsau. Rugged Alpine peaks provide a dramatic backdrop to this peaceful German landscape.",
+      "src": "images/photos/DSC02087.jpg",
+      "width": 1591,
+      "height": 2048,
+      "location": "germany",
+      "categories": [
+        "landscape",
+        "nature"
+      ],
+      "hero": false,
+      "mobileHero": true,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 160,
+        "aperture": "f/8",
+        "shutterSpeed": "1/100s",
+        "focalLength": "24mm"
+      }
+    },
+    {
+      "title": "Twilight over the Zugspitze Massif",
+      "description": "Golden light pierces through heavy clouds over the snow-capped Zugspitze massif. Below, the autumn forests of Garmisch-Partenkirchen glow during a seasonal transition.",
+      "src": "images/photos/DSC02188.jpg",
+      "width": 2048,
+      "height": 1190,
+      "location": "germany",
+      "categories": [
+        "mountains",
+        "landscape"
+      ],
+      "hero": true,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 320,
+        "aperture": "f/8",
+        "shutterSpeed": "1/100s",
+        "focalLength": "72mm"
+      }
+    },
+    {
+      "title": "Golden Light on Petra's Al-Khazneh",
+      "description": "Warm morning light reveals the ornate columns of Petra's iconic Treasury. Carved from sheer sandstone, the ancient facade glows against the deep shadows of the canyon.",
+      "src": "images/photos/DSCF0306.jpg",
+      "width": 1408,
+      "height": 2048,
+      "location": "jordan",
+      "categories": [
+        "cityscape",
+        "desert"
+      ],
+      "hero": false,
+      "mobileHero": true,
+      "metadata": {
+        "camera": "FUJIFILM X-T5",
+        "iso": 125,
+        "aperture": "f/6.4",
+        "shutterSpeed": "1/110s",
+        "focalLength": "30mm"
+      }
+    },
+    {
+      "title": "Golden Hour in Wadi Rum",
+      "description": "A camel caravan rests under the warm amber glow of a setting sun amidst the towering sandstone cliffs of Jordan.",
+      "src": "images/photos/DSCF0447.jpg",
+      "width": 2048,
+      "height": 1072,
+      "location": "jordan",
+      "categories": [
+        "landscape",
+        "desert"
+      ],
+      "hero": true,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "FUJIFILM X-T5",
+        "iso": 125,
+        "aperture": "f/6.4",
+        "shutterSpeed": "1/1000s",
+        "focalLength": "28mm"
+      }
+    },
+    {
+      "title": "The Last Light of Wadi Rum",
+      "description": "The sun sinks behind the rugged silhouettes of Jordan's desert peaks, flooding the valley with amber light. A deep purple sky frames the final glow over the vast sands.",
+      "src": "images/photos/DSCF0493.jpg",
+      "width": 7258,
+      "height": 4083,
+      "location": "jordan",
+      "categories": [
+        "landscape",
+        "desert"
+      ],
+      "hero": true,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "FUJIFILM X-T5",
+        "iso": 125,
+        "aperture": "f/7.1",
+        "shutterSpeed": "1/250s",
+        "focalLength": "16mm"
+      }
+    }
+  ]
+}
