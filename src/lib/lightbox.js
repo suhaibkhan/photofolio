@@ -10,19 +10,13 @@ const ICON_EXPAND = `<svg class="lightbox__icon lightbox__icon--expand" viewBox=
 const ICON_COLLAPSE = `<svg class="lightbox__icon lightbox__icon--collapse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 4 9 9 4 9"/><polyline points="15 4 15 9 20 9"/><polyline points="9 20 9 15 4 15"/><polyline points="15 20 15 15 20 15"/></svg>`;
 const ICON_HALFCIRCLE = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3 A9 9 0 0 1 12 21 Z" fill="currentColor" stroke="none"/></svg>`;
 const ICON_LOCATION = `<svg class="lightbox__loc-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s-7-7.5-7-13a7 7 0 0 1 14 0c0 5.5-7 13-7 13z"/><circle cx="12" cy="9" r="2.5"/></svg>`;
-const ARROW_CTA = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" width="13" height="13"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
-
 /**
  * Create and return a lightbox DOM element, appended to document.body.
  * @param {object} opts
- * @param {string}  opts.id          - Element id (default: 'lightbox')
- * @param {string}  opts.label       - aria-label (default: 'Photo viewer')
- * @param {boolean} opts.galleryLink - Include a "View in Gallery" link in the panel
+ * @param {string}  opts.id    - Element id (default: 'lightbox')
+ * @param {string}  opts.label - aria-label (default: 'Photo viewer')
  */
-export function createLightboxEl({ id = 'lightbox', label = 'Photo viewer', galleryLink = false } = {}) {
-  const galleryLinkHtml = galleryLink
-    ? `<a href="gallery.html" class="lightbox__gallery-link" aria-label="View this photograph in the gallery">View in Gallery ${ARROW_CTA}</a>`
-    : '';
+export function createLightboxEl({ id = 'lightbox', label = 'Photo viewer' } = {}) {
 
   const el = document.createElement('div');
   el.className = 'lightbox';
@@ -91,7 +85,6 @@ export function createLightboxEl({ id = 'lightbox', label = 'Photo viewer', gall
 
               <ul class="lightbox__tags" aria-label="Categories"></ul>
 
-              ${galleryLinkHtml}
             </div>
           </div>
         </figcaption>
@@ -173,8 +166,6 @@ function applyPanelData(el, item, currentIndex, totalCount, specEls) {
   const elTotal      = q('.lightbox__counter-total');
   const elPlateNum   = q('.lightbox__plate-num');
   const elPlateOf    = q('.lightbox__plate-of');
-  const elGalleryLink = q('.lightbox__gallery-link');
-
   if (elTitle) elTitle.textContent = item.title || '';
   if (elDesc) { elDesc.textContent = item.description || ''; elDesc.style.display = item.description ? '' : 'none'; }
   const loc = item.locFull || '';
@@ -198,7 +189,6 @@ function applyPanelData(el, item, currentIndex, totalCount, specEls) {
   if (elTotal)   elTotal.textContent   = pad(totalCount);
   if (elPlateNum) elPlateNum.textContent = pad(currentIndex + 1);
   if (elPlateOf)  elPlateOf.textContent  = ` of ${pad(totalCount)}`;
-  if (elGalleryLink) elGalleryLink.href  = item.href || 'gallery.html';
 }
 
 function wireBaseInteraction(el, closeFn, navigateFn, toggleMaximize, toggleTheme) {

@@ -460,7 +460,7 @@ export function initFeatured(data) {
   syncActiveStates();
 
   // Featured lightbox — create element via JS (no hardcoded HTML needed) and open as overlay
-  const lbEl = createLightboxEl({ id: 'featured-lightbox', label: 'Featured photo viewer', galleryLink: true });
+  const lbEl = createLightboxEl({ id: 'featured-lightbox', label: 'Featured photo viewer' });
   {
     const lb = initDataLightbox(lbEl, featured);
 

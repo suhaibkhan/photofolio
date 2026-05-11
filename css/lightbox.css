@@ -452,24 +452,6 @@
   background: var(--lb-paper);
 }
 
-.lightbox__gallery-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-primary);
-  font-size: 0.68rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--lb-ink-soft);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.lightbox__gallery-link:hover,
-.lightbox__gallery-link:focus-visible {
-  color: var(--lb-ink);
-}
-
 /* ---- Hints ---- */
 .lightbox__hints {
   position: absolute;
