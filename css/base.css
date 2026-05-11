@@ -335,6 +335,13 @@ ul {
   height: 44px;
   gap: 5px;
   z-index: 200;
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
 }
 
 /* Hidden on desktop — only shown inside the mobile full-screen overlay */
