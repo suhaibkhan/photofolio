@@ -268,7 +268,7 @@ export function initHeroSlideshow(data) {
 // ============================
 // 4b. FEATURED FRAME — thumb-to-main swap
 // ============================
-export function initFeatured() {
+export function initFeatured(data) {
   const section = document.getElementById('featured');
   if (!section) return;
 
@@ -277,92 +277,176 @@ export function initFeatured() {
   const locName = section.querySelector('.featured__location-name');
   const lede = section.querySelector('.featured__lede');
   const cta = section.querySelector('.featured__cta');
+  const moreLink = section.querySelector('.featured__more');
   if (!main || !heading || !lede || !cta) return;
 
-  const SWAP_KEYS = ['href', 'title', 'description', 'locTag', 'locFull', 'src', 'webpCover', 'webpHero', 'width', 'height'];
+  const thumbs = Array.from(section.querySelectorAll('.featured__thumb'));
+  if (!thumbs.length) return;
 
-  function readPhoto(el) {
-    return {
-      href: el.dataset.href || '',
-      title: el.dataset.title || '',
-      description: el.dataset.description || '',
-      locTag: el.dataset.locTag || '',
-      locFull: el.dataset.locFull || '',
-      src: el.dataset.src || '',
-      webpCover: el.dataset.webpCover || '',
-      webpHero: el.dataset.webpHero || '',
-      width: el.dataset.width || '',
-      height: el.dataset.height || '',
-    };
+  const allPhotos = (data && data.photos) || [];
+  const locationMap = buildLocationMap(data || { locations: [] });
+  const featured = allPhotos
+    .map((p, idx) => ({ p, idx }))
+    .filter(({ p }) => p.featured)
+    .reverse()
+    .map(({ p, idx }) => ({
+      href: `gallery.html#p/${allPhotos.length - idx}`,
+      title: p.title || '',
+      description: p.description || '',
+      locFull: (locationMap.get(p.location) && locationMap.get(p.location).name)
+        || getLocationLabel(p, locationMap) || '',
+      src: imgSrc(p.src),
+      webpCover: coverWebp(p.src),
+      webpHero: heroWebp(p.src),
+      width: String(p.width || ''),
+      height: String(p.height || ''),
+    }));
+
+  if (!featured.length) return;
+
+  const PAGE_SIZE = thumbs.length;
+  let startIndex = 0;
+
+  function photoAt(slot) {
+    return featured[(startIndex + slot) % featured.length];
   }
 
-  function writePhotoData(el, p) {
-    SWAP_KEYS.forEach((k) => { el.dataset[k] = p[k] || ''; });
-    if (el.matches('.featured__thumb')) {
-      el.setAttribute('aria-label', `Show ${p.title} in featured frame`);
-    }
-  }
-
-  function paintImage(container, p, webpSrc) {
-    const picture = container.querySelector('picture');
-    const source = picture?.querySelector('source[type="image/webp"]');
-    const img = picture?.querySelector('img');
-    if (source) source.srcset = webpSrc;
+  function paintThumb(thumb, p) {
+    const picture = thumb.querySelector('picture');
+    const source = picture && picture.querySelector('source[type="image/webp"]');
+    const img = picture && picture.querySelector('img');
+    if (source) source.srcset = p.webpCover;
     if (img) {
       img.src = p.src;
       img.alt = p.title;
       if (p.width) img.width = parseInt(p.width, 10) || img.width;
       if (p.height) img.height = parseInt(p.height, 10) || img.height;
     }
+    thumb.href = p.href;
+    thumb.setAttribute('aria-label', `Show ${p.title} in featured frame`);
+    Object.assign(thumb.dataset, {
+      href: p.href,
+      title: p.title,
+      description: p.description,
+      locFull: p.locFull,
+      src: p.src,
+      webpCover: p.webpCover,
+      webpHero: p.webpHero,
+      width: p.width,
+      height: p.height,
+    });
   }
 
   function paintMain(p) {
-    paintImage(main, p, p.webpHero || p.webpCover);
+    const picture = main.querySelector('picture');
+    const source = picture && picture.querySelector('source[type="image/webp"]');
+    const img = picture && picture.querySelector('img');
+    if (source) source.srcset = p.webpHero || p.webpCover;
+    if (img) {
+      img.src = p.src;
+      img.alt = p.title;
+      if (p.width) img.width = parseInt(p.width, 10) || img.width;
+      if (p.height) img.height = parseInt(p.height, 10) || img.height;
+    }
     main.href = p.href;
     main.setAttribute('aria-label', `View ${p.title}`);
-    const tag = main.querySelector('.featured__main-tag');
-    if (tag) tag.textContent = p.locTag;
     heading.textContent = p.title;
     if (locName) locName.textContent = p.locFull;
     lede.textContent = p.description;
     cta.href = p.href;
+    main.dataset.src = p.src;
+    main.dataset.href = p.href;
   }
 
-  function swap(thumb) {
-    const fromThumb = readPhoto(thumb);
-    const fromMain = readPhoto(main);
+  function syncActiveStates() {
+    const currentSrc = main.dataset.src || '';
+    thumbs.forEach((t) => {
+      const active = !!currentSrc && t.dataset.src === currentSrc;
+      t.classList.toggle('is-active', active);
+      if (active) t.setAttribute('aria-current', 'true');
+      else t.removeAttribute('aria-current');
+    });
+  }
 
-    // Cross-fade the main image while keeping the thumb crisp.
+  function readThumb(thumb) {
+    return {
+      href: thumb.dataset.href || '',
+      title: thumb.dataset.title || '',
+      description: thumb.dataset.description || '',
+      locFull: thumb.dataset.locFull || '',
+      src: thumb.dataset.src || '',
+      webpCover: thumb.dataset.webpCover || '',
+      webpHero: thumb.dataset.webpHero || '',
+      width: thumb.dataset.width || '',
+      height: thumb.dataset.height || '',
+    };
+  }
+
+  function selectThumb(thumb) {
+    if (thumb.classList.contains('is-active')) return;
     main.classList.add('is-swapping');
-
-    // Thumb takes the main's previous photo immediately (cover-sized webp).
-    paintImage(thumb, fromMain, fromMain.webpCover || fromMain.webpHero);
-    thumb.href = fromMain.href;
-    writePhotoData(thumb, fromMain);
-
-    // Main rebinds to the thumb's photo on the next frame so the fade reads.
     requestAnimationFrame(() => {
-      paintMain(fromThumb);
-      writePhotoData(main, fromThumb);
+      paintMain(readThumb(thumb));
+      syncActiveStates();
       requestAnimationFrame(() => {
         main.classList.remove('is-swapping');
       });
     });
   }
 
-  section.querySelectorAll('.featured__thumb').forEach((thumb) => {
-    if (thumb.classList.contains('featured__thumb--more')) return;
+  const thumbsWrap = section.querySelector('.featured__thumbs');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  let paginating = false;
+
+  function advancePage() {
+    if (paginating) return;
+    if (!thumbsWrap || reduceMotion.matches) {
+      startIndex = (startIndex + PAGE_SIZE) % featured.length;
+      thumbs.forEach((thumb, i) => paintThumb(thumb, photoAt(i)));
+      syncActiveStates();
+      return;
+    }
+
+    paginating = true;
+    thumbsWrap.classList.add('is-paginating-out');
+
+    setTimeout(() => {
+      startIndex = (startIndex + PAGE_SIZE) % featured.length;
+      thumbs.forEach((thumb, i) => paintThumb(thumb, photoAt(i)));
+      syncActiveStates();
+
+      thumbsWrap.classList.remove('is-paginating-out');
+      thumbsWrap.classList.add('is-paginating-in');
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          thumbsWrap.classList.remove('is-paginating-in');
+          setTimeout(() => { paginating = false; }, 320);
+        });
+      });
+    }, 280);
+  }
+
+  thumbs.forEach((thumb) => {
     thumb.addEventListener('click', (e) => {
       e.preventDefault();
-      swap(thumb);
+      selectThumb(thumb);
     });
     thumb.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        swap(thumb);
+        selectThumb(thumb);
       }
     });
   });
+
+  if (moreLink && featured.length > PAGE_SIZE) {
+    moreLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      advancePage();
+    });
+  }
+
+  syncActiveStates();
 }
 
 // ============================

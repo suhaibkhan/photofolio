@@ -3,6 +3,7 @@ import {
   initMobileMenu,
   initHeaderScroll,
   initScrollReveal,
+  initBackToTop,
 } from '../lib/shared.js';
 import {
   initGalleryFilters,
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initGalleryFilters(data);
     initGallery(data);
     initScrollReveal();
+    initBackToTop();
   } catch (err) {
     console.error('Failed to initialise gallery page:', err);
   }

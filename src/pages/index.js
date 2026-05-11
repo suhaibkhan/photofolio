@@ -3,6 +3,7 @@ import {
   initMobileMenu,
   initHeaderScroll,
   initScrollReveal,
+  initBackToTop,
 } from '../lib/shared.js';
 import {
   initHeroSlideshow,
@@ -19,8 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeroSlideshow(data);
     initThemesList(data);
     initAtlas(data);
-    initFeatured();
+    initFeatured(data);
     initScrollReveal();
+    initBackToTop();
   } catch (err) {
     console.error('Failed to initialise index page:', err);
   }

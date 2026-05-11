@@ -127,7 +127,7 @@ export function renderFeaturedHtml(data) {
   if (!featured.length) return '';
 
   const main = featured[0];
-  const thumbs = featured.slice(1, 4);
+  const thumbs = featured.slice(0, 4);
   const more = Math.max(0, featured.length - 4);
   const locationMap = buildLocationMap(data);
 
@@ -151,8 +151,10 @@ export function renderFeaturedHtml(data) {
   const mainLoc = getLocationLabel(main, locationMap);
   const mainLocFull = (locationMap.get(main.location)?.name) || mainLoc;
 
-  const thumbsHtml = thumbs.map((p) => {
-    return `<a href="${esc(galleryUrlForPhoto(p, photos))}" class="featured__thumb" aria-label="Show ${esc(p.title)} in featured frame"${dataAttrs(p)}>`
+  const thumbsHtml = thumbs.map((p, i) => {
+    const activeClass = i === 0 ? ' is-active' : '';
+    const ariaCurrent = i === 0 ? ' aria-current="true"' : '';
+    return `<a href="${esc(galleryUrlForPhoto(p, photos))}" class="featured__thumb${activeClass}" aria-label="Show ${esc(p.title)} in featured frame"${ariaCurrent}${dataAttrs(p)}>`
       + `<picture>`
       + `<source type="image/webp" srcset="${esc(coverWebp(p.src))}">`
       + `<img src="${esc(imgSrc(p.src))}" alt="${esc(p.title)}" width="${p.width}" height="${p.height}" loading="lazy" decoding="async">`
@@ -161,15 +163,16 @@ export function renderFeaturedHtml(data) {
       + `</a>`;
   }).join('');
 
-  const moreTile = more > 0
-    ? `<a href="gallery.html" class="featured__thumb featured__thumb--more" aria-label="View all photographs">`
-      + `<span class="featured__thumb-more-num">+${more}</span>`
-      + `<span class="featured__thumb-more-label">More</span>`
+  const moreLink = more > 0
+    ? `<a href="gallery.html" class="featured__more" aria-label="View all featured photographs">`
+      + `<span class="featured__more-label">+${more} More</span>`
+      + `<span class="featured__more-rule" aria-hidden="true"></span>`
+      + `<span class="featured__more-arrow" aria-hidden="true">&rarr;</span>`
       + `</a>`
     : '';
 
-  const thumbsBlock = (thumbsHtml || moreTile)
-    ? `<div class="featured__thumbs">${thumbsHtml}${moreTile}</div>`
+  const thumbsBlock = thumbsHtml
+    ? `<div class="featured__thumbs">${thumbsHtml}</div>`
     : '';
 
   return `<div class="featured__text reveal">`
@@ -184,7 +187,7 @@ export function renderFeaturedHtml(data) {
     + `<a href="${esc(mainUrl)}" class="featured__cta">`
     + `<span class="featured__cta-label">View the Photograph</span>`
     + `<span class="featured__cta-rule" aria-hidden="true"></span>`
-    + `<span class="featured__cta-arrow" aria-hidden="true">&rarr;</span>`
+      + `<span class="featured__cta-arrow" aria-hidden="true">${ARROW_SVG}</span>`
     + `</a>`
     + `</div>`
     + `<div class="featured__media reveal">`
@@ -193,10 +196,9 @@ export function renderFeaturedHtml(data) {
     + `<source type="image/webp" srcset="${esc(heroWebp(main.src))}">`
     + `<img src="${esc(imgSrc(main.src))}" sizes="(max-width: 1024px) 100vw, 60vw" alt="${esc(main.title)}" width="${main.width}" height="${main.height}" loading="lazy" decoding="async">`
     + `</picture>`
-    + `<span class="featured__main-frame" aria-hidden="true"></span>`
-    + `<span class="featured__main-tag" aria-hidden="true">${esc((mainLoc || '').toUpperCase())}</span>`
     + `</a>`
     + thumbsBlock
+    + moreLink
     + `</div>`;
 }
 
