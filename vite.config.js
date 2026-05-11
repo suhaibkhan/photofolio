@@ -27,6 +27,7 @@ export default defineConfig({
           if (
             id.includes('src/lib/shared.js')
             || id.includes('src/lib/paths.js')
+            || id.includes('src/lib/lightbox.js')
             || id.includes('data/photos-local.json')
           ) {
             return 'shared';

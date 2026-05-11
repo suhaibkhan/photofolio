@@ -1,5 +1,6 @@
 import '../../css/critical.css';
 import { imgSrc, coverWebp, heroWebp, buildLocationMap, getLocationLabel } from './shared.js';
+import { createLightboxEl, initDataLightbox } from './lightbox.js';
 
 // ============================
 // 4. HERO SLIDESHOW
@@ -285,22 +286,32 @@ export function initFeatured(data) {
 
   const allPhotos = (data && data.photos) || [];
   const locationMap = buildLocationMap(data || { locations: [] });
+  const categoryMap = new Map(((data && data.categories) || []).map((c) => [c.id, c]));
   const featured = allPhotos
     .map((p, idx) => ({ p, idx }))
     .filter(({ p }) => p.featured)
     .reverse()
-    .map(({ p, idx }) => ({
-      href: `gallery.html#p/${allPhotos.length - idx}`,
-      title: p.title || '',
-      description: p.description || '',
-      locFull: (locationMap.get(p.location) && locationMap.get(p.location).name)
-        || getLocationLabel(p, locationMap) || '',
-      src: imgSrc(p.src),
-      webpCover: coverWebp(p.src),
-      webpHero: heroWebp(p.src),
-      width: String(p.width || ''),
-      height: String(p.height || ''),
-    }));
+    .map(({ p, idx }) => {
+      const m = p.metadata || {};
+      return {
+        href: `gallery.html#p/${allPhotos.length - idx}`,
+        title: p.title || '',
+        description: p.description || '',
+        locFull: (locationMap.get(p.location) && locationMap.get(p.location).name)
+          || getLocationLabel(p, locationMap) || '',
+        src: imgSrc(p.src),
+        webpCover: coverWebp(p.src),
+        webpHero: heroWebp(p.src),
+        width: String(p.width || ''),
+        height: String(p.height || ''),
+        camera: m.camera || '',
+        focal: m.focalLength || '',
+        aperture: m.aperture || '',
+        shutter: m.shutterSpeed || '',
+        iso: m.iso != null ? String(m.iso) : '',
+        tags: (p.categories || []).map((id) => (categoryMap.get(id) || {}).name || id).filter(Boolean),
+      };
+    });
 
   if (!featured.length) return;
 
@@ -447,6 +458,22 @@ export function initFeatured(data) {
   }
 
   syncActiveStates();
+
+  // Featured lightbox — create element via JS (no hardcoded HTML needed) and open as overlay
+  const lbEl = createLightboxEl({ id: 'featured-lightbox', label: 'Featured photo viewer', galleryLink: true });
+  {
+    const lb = initDataLightbox(lbEl, featured);
+
+    function openAtCurrent(e) {
+      e.preventDefault();
+      const currentSrc = main.dataset.src || (featured[0] && featured[0].src) || '';
+      const idx = featured.findIndex((f) => f.src === currentSrc);
+      lb.open(idx >= 0 ? idx : 0);
+    }
+
+    main.addEventListener('click', openAtCurrent);
+    cta.addEventListener('click', openAtCurrent);
+  }
 }
 
 // ============================

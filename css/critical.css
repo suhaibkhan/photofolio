@@ -60,6 +60,7 @@ button {
   cursor: pointer;
   border: none;
   background: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 ul {
@@ -334,6 +335,11 @@ ul {
   height: 44px;
   gap: 5px;
   z-index: 200;
+}
+
+/* Hidden on desktop — only shown inside the mobile full-screen overlay */
+.nav-featured-mobile {
+  display: none;
 }
 
 .menu-toggle span {
@@ -2459,11 +2465,14 @@ body.menu-open .site-header--transparent:not(.scrolled) .menu-toggle span {
     gap: 6px;
   }
 
-  /* On mobile, right nav-list stacks below the left one in the overlay */
-  .site-header__right .nav-list {
-    z-index: 149;
-    justify-content: flex-end;
-    padding-bottom: 120px;
+  /* Show Featured inside the mobile overlay alongside other primary nav links */
+  .nav-featured-mobile {
+    display: list-item;
+  }
+
+  /* Hide the desktop-only secondary nav (Featured next to Follow) on mobile */
+  .site-header__right .site-nav {
+    display: none;
   }
 
   /* Full-screen overlay menu */
