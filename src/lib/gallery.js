@@ -1,4 +1,4 @@
-import '../../css/style.css';
+import '../../css/gallery.css';
 import { imgSrc, coverWebp, buildLocationMap } from './shared.js';
 import { createLightboxEl, initLightbox } from './lightbox.js';
 

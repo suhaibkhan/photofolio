@@ -1,4 +1,4 @@
-import '../../css/critical.css';
+import '../../css/home.css';
 import { imgSrc, coverWebp, heroWebp, buildLocationMap, getLocationLabel } from './shared.js';
 import { createLightboxEl, initDataLightbox } from './lightbox.js';
 

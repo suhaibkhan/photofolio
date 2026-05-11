@@ -1,3 +1,4 @@
+import '../../css/base.css';
 import data from '../../data/photos-local.json';
 import { imgSrc, coverWebp, heroWebp } from './paths.js';
 
