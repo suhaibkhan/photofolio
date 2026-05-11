@@ -9,11 +9,21 @@ import boxen from "boxen";
 
 const ROOT = process.cwd();
 const PUBLIC_DIR = path.join(ROOT, "public");
+const REPO_IMAGES_DIR = path.join(ROOT, "images");
 const DATA_PATH = path.join(ROOT, "data", "photos-local.json");
-const OUTPUT_DIR = path.join(PUBLIC_DIR, "images", "covers");
 
-const MAX_DIMENSION = 1200;
-const WEBP_QUALITY = 80;
+const COVERS_DIR = path.join(PUBLIC_DIR, "images", "covers");
+const HERO_DIR = path.join(PUBLIC_DIR, "images", "hero");
+const LOGO_PNG = path.join(REPO_IMAGES_DIR, "logo.png");
+const LOGO_WEBP = path.join(REPO_IMAGES_DIR, "logo.webp");
+
+const COVER_MAX_DIMENSION = 1200;
+const COVER_QUALITY = 80;
+
+const HERO_MAX_DIMENSION = 2400;
+const HERO_QUALITY = 85;
+
+const LOGO_QUALITY = 90;
 
 const FORCE = process.argv.includes("--force");
 
@@ -41,15 +51,24 @@ async function fileSize(absolutePath) {
   }
 }
 
-async function collectSources() {
+async function loadData() {
   const raw = await fs.readFile(DATA_PATH, "utf8");
-  const data = JSON.parse(raw);
+  return JSON.parse(raw);
+}
 
+function collectCoverSources(data) {
   const sources = new Set();
   for (const loc of data.locations || []) if (loc.cover) sources.add(loc.cover);
   for (const cat of data.categories || []) if (cat.cover) sources.add(cat.cover);
   for (const photo of data.photos || []) if (photo.src) sources.add(photo.src);
+  return [...sources].sort();
+}
 
+function collectHeroSources(data) {
+  const sources = new Set();
+  for (const photo of data.photos || []) {
+    if (photo.src && (photo.hero || photo.mobileHero || photo.featured)) sources.add(photo.src);
+  }
   return [...sources].sort();
 }
 
@@ -60,10 +79,10 @@ async function isOutputFresh(sourcePath, outputPath) {
   return out >= src;
 }
 
-async function compressOne(relativeSrc) {
+async function compressPhoto(relativeSrc, { outputDir, maxDimension, quality }) {
   const sourceAbs = path.join(PUBLIC_DIR, relativeSrc);
   const baseName = path.parse(relativeSrc).name;
-  const webpOut = path.join(OUTPUT_DIR, `${baseName}.webp`);
+  const webpOut = path.join(outputDir, `${baseName}.webp`);
 
   const sourceSize = await fileSize(sourceAbs);
   if (!sourceSize) {
@@ -78,27 +97,46 @@ async function compressOne(relativeSrc) {
   await sharp(sourceAbs, { failOn: "none" })
     .rotate()
     .resize({
-      width: MAX_DIMENSION,
-      height: MAX_DIMENSION,
+      width: maxDimension,
+      height: maxDimension,
       fit: "inside",
       withoutEnlargement: true,
     })
-    .webp({ quality: WEBP_QUALITY, effort: 5 })
+    .webp({ quality, effort: 5 })
     .toFile(webpOut);
 
   const webpSize = await fileSize(webpOut);
   return { relativeSrc, status: "compressed", sourceSize, webpSize };
 }
 
-function printBanner(count) {
+async function compressLogo() {
+  const sourceSize = await fileSize(LOGO_PNG);
+  if (!sourceSize) {
+    return { relativeSrc: "images/logo.png", status: "missing", sourceSize: 0, webpSize: 0 };
+  }
+
+  if (await isOutputFresh(LOGO_PNG, LOGO_WEBP)) {
+    const webpSize = await fileSize(LOGO_WEBP);
+    return { relativeSrc: "images/logo.png", status: "skipped", sourceSize, webpSize };
+  }
+
+  await sharp(LOGO_PNG, { failOn: "none" })
+    .webp({ quality: LOGO_QUALITY, effort: 6 })
+    .toFile(LOGO_WEBP);
+
+  const webpSize = await fileSize(LOGO_WEBP);
+  return { relativeSrc: "images/logo.png", status: "compressed", sourceSize, webpSize };
+}
+
+function printBanner({ coverCount, heroCount }) {
   console.log(
     boxen(
       [
-        `  ${pc.bold(pc.cyan("◆"))}  ${pc.bold("COVER IMAGE COMPRESSOR")}`,
+        `  ${pc.bold(pc.cyan("◆"))}  ${pc.bold("IMAGE COMPRESSOR")}`,
         `  ${pc.dim("─────────────────────────────────────────────")}`,
-        `  ${pc.bold("Sources:")}  ${pc.cyan(String(count))} unique image${count === 1 ? "" : "s"}`,
-        `  ${pc.bold("Max dim:")}  ${MAX_DIMENSION}px (long edge, no upscale)`,
-        `  ${pc.bold("Output:")}   ${pc.dim(path.relative(ROOT, OUTPUT_DIR))} ${pc.dim("(.webp only — original .jpg is the fallback)")}`,
+        `  ${pc.bold("Covers:")}   ${pc.cyan(String(coverCount))} @ ${COVER_MAX_DIMENSION}px q${COVER_QUALITY} ${pc.dim("→")} ${pc.dim(path.relative(ROOT, COVERS_DIR))}`,
+        `  ${pc.bold("Hero:")}     ${pc.cyan(String(heroCount))} @ ${HERO_MAX_DIMENSION}px q${HERO_QUALITY} ${pc.dim("→")} ${pc.dim(path.relative(ROOT, HERO_DIR))}`,
+        `  ${pc.bold("Logo:")}     ${pc.cyan("1")} ${pc.dim("(lossy WebP q" + LOGO_QUALITY + ")")} ${pc.dim("→")} ${pc.dim(path.relative(ROOT, LOGO_WEBP))}`,
         `  ${pc.bold("Mode:")}     ${FORCE ? pc.yellow("force re-encode") : pc.dim("skip up-to-date outputs")}`,
       ].join("\n"),
       {
@@ -111,7 +149,7 @@ function printBanner(count) {
   );
 }
 
-function printSummary(results) {
+function printSummary(label, results) {
   const compressed = results.filter((r) => r.status === "compressed");
   const skipped = results.filter((r) => r.status === "skipped");
   const missing = results.filter((r) => r.status === "missing");
@@ -136,7 +174,7 @@ function printSummary(results) {
 
   console.log(
     boxen(lines.join("\n"), {
-      title: pc.green(pc.bold("  Summary  ")),
+      title: pc.green(pc.bold(`  ${label}  `)),
       borderStyle: "round",
       borderColor: "green",
       padding: { top: 1, bottom: 1, left: 0, right: 2 },
@@ -151,45 +189,77 @@ function printSummary(results) {
   }
 }
 
-async function main() {
-  const sources = await collectSources();
-  if (!sources.length) {
-    console.log(pc.dim("No cover or photo sources found in data/photos-local.json — nothing to do."));
-    return;
-  }
-
-  await fs.mkdir(OUTPUT_DIR, { recursive: true });
-  printBanner(sources.length);
-
+async function runPass(label, sources, config) {
   const results = [];
   for (let i = 0; i < sources.length; i += 1) {
     const relativeSrc = sources[i];
-    const label = `[${i + 1}/${sources.length}] ${relativeSrc}`;
-    const spinner = ora({ text: label, color: "cyan" }).start();
+    const text = `${pc.bold(label)} [${i + 1}/${sources.length}] ${relativeSrc}`;
+    const spinner = ora({ text, color: "cyan" }).start();
     try {
-      const result = await compressOne(relativeSrc);
+      const result = await compressPhoto(relativeSrc, config);
       if (result.status === "compressed") {
         const ratio = result.sourceSize > 0
           ? ` ${pc.dim("·")} ${pc.green(`-${((1 - result.webpSize / result.sourceSize) * 100).toFixed(0)}%`)}`
           : "";
-        spinner.succeed(`${label} ${pc.dim(`(${formatBytes(result.sourceSize)} → ${formatBytes(result.webpSize)})`)}${ratio}`);
+        spinner.succeed(`${text} ${pc.dim(`(${formatBytes(result.sourceSize)} → ${formatBytes(result.webpSize)})`)}${ratio}`);
       } else if (result.status === "skipped") {
-        spinner.info(`${label} ${pc.dim("(up-to-date)")}`);
+        spinner.info(`${text} ${pc.dim("(up-to-date)")}`);
       } else {
-        spinner.fail(`${label} ${pc.red("(source missing)")}`);
+        spinner.fail(`${text} ${pc.red("(source missing)")}`);
       }
       results.push(result);
     } catch (error) {
-      spinner.fail(`${label} ${pc.red(String(error?.message || error))}`);
+      spinner.fail(`${text} ${pc.red(String(error?.message || error))}`);
       results.push({ relativeSrc, status: "missing", sourceSize: 0, webpSize: 0 });
     }
   }
+  return results;
+}
 
-  printSummary(results);
+async function main() {
+  const data = await loadData();
+  const coverSources = collectCoverSources(data);
+  const heroSources = collectHeroSources(data);
+
+  await fs.mkdir(COVERS_DIR, { recursive: true });
+  await fs.mkdir(HERO_DIR, { recursive: true });
+
+  printBanner({ coverCount: coverSources.length, heroCount: heroSources.length });
+
+  const coverResults = await runPass("covers", coverSources, {
+    outputDir: COVERS_DIR,
+    maxDimension: COVER_MAX_DIMENSION,
+    quality: COVER_QUALITY,
+  });
+  printSummary("Covers Summary", coverResults);
+
+  const heroResults = await runPass("hero  ", heroSources, {
+    outputDir: HERO_DIR,
+    maxDimension: HERO_MAX_DIMENSION,
+    quality: HERO_QUALITY,
+  });
+  printSummary("Hero Summary", heroResults);
+
+  const logoSpinner = ora({ text: `${pc.bold("logo  ")} images/logo.png`, color: "cyan" }).start();
+  try {
+    const logoResult = await compressLogo();
+    if (logoResult.status === "compressed") {
+      const ratio = logoResult.sourceSize > 0
+        ? ` ${pc.dim("·")} ${pc.green(`-${((1 - logoResult.webpSize / logoResult.sourceSize) * 100).toFixed(0)}%`)}`
+        : "";
+      logoSpinner.succeed(`${pc.bold("logo  ")} images/logo.png ${pc.dim(`(${formatBytes(logoResult.sourceSize)} → ${formatBytes(logoResult.webpSize)})`)}${ratio}`);
+    } else if (logoResult.status === "skipped") {
+      logoSpinner.info(`${pc.bold("logo  ")} images/logo.png ${pc.dim("(up-to-date)")}`);
+    } else {
+      logoSpinner.fail(`${pc.bold("logo  ")} images/logo.png ${pc.red("(source missing)")}`);
+    }
+  } catch (error) {
+    logoSpinner.fail(`${pc.bold("logo  ")} ${pc.red(String(error?.message || error))}`);
+  }
 }
 
 main().catch((error) => {
-  console.error(pc.red("✖ Failed to compress covers."));
+  console.error(pc.red("✖ Failed to compress images."));
   console.error(error?.stack || error);
   process.exitCode = 1;
 });

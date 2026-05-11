@@ -2,11 +2,14 @@ import {
   data,
   initMobileMenu,
   initHeaderScroll,
+  initScrollReveal,
+} from '../lib/shared.js';
+import {
   initHeroSlideshow,
   initThemesList,
   initAtlas,
-  initScrollReveal,
-} from '../lib/app.js';
+  initFeatured,
+} from '../lib/home.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
@@ -16,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initHeroSlideshow(data);
     initThemesList(data);
     initAtlas(data);
+    initFeatured();
     initScrollReveal();
   } catch (err) {
     console.error('Failed to initialise index page:', err);

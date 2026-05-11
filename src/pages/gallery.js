@@ -2,10 +2,12 @@ import {
   data,
   initMobileMenu,
   initHeaderScroll,
+  initScrollReveal,
+} from '../lib/shared.js';
+import {
   initGalleryFilters,
   initGallery,
-  initScrollReveal,
-} from '../lib/app.js';
+} from '../lib/gallery.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Suhaib Khan Photography</title>
   <meta name="description" content="Landscape photography portfolio by Suhaib Khan. Capturing light across Dubai, Georgia, Sharjah, Switzerland, and Germany.">
+  <!--PRERENDER:head-preload-->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Alegreya+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
@@ -22,13 +23,17 @@
         <ul class="nav-list">
           <li><a href="#locations">Places</a></li>
           <li><a href="#categories">Themes</a></li>
+          <li><a href="#featured">Featured</a></li>
           <li><a href="gallery.html">Gallery</a></li>
         </ul>
       </nav>
     </div>
 
     <a href="index.html" class="logo">
-      <img src="images/logo.png" alt="Suhaib Khan Photography" width="180" height="75">
+      <picture>
+        <source type="image/webp" srcset="images/logo.webp">
+        <img src="images/logo.png" alt="Suhaib Khan Photography" width="180" height="75">
+      </picture>
     </a>
 
     <a href="https://instagram.com/suhaib_s_khan" class="site-instagram" target="_blank" rel="noopener" aria-label="Follow me on Instagram">
@@ -50,7 +55,7 @@
 
   <section class="hero">
     <div class="hero__slides">
-      <!-- Slides injected by JS -->
+      <!--PRERENDER:hero-->
     </div>
 
     <div class="hero__vignette" aria-hidden="true"></div>
@@ -73,8 +78,8 @@
 
       <div class="hero__bottom">
         <div class="hero__info">
-          <span class="hero__title"></span>
-          <span class="hero__location-name"></span>
+          <span class="hero__title visible"><!--PRERENDER:hero-title--></span>
+          <span class="hero__location-name visible"><!--PRERENDER:hero-location--></span>
         </div>
 
         <div class="hero__scroll">
@@ -103,7 +108,7 @@
         </div>
 
         <div class="atlas__grid" id="locations-grid">
-          <!-- Tiles injected by JS -->
+          <!--PRERENDER:atlas-->
         </div>
 
         <div class="atlas-meter" aria-hidden="true">
@@ -136,7 +141,7 @@
 
         <div class="themes-rail">
           <div class="themes-track" id="categories-grid" role="list">
-            <!-- Plates injected by JS -->
+            <!--PRERENDER:themes-->
           </div>
         </div>
 
@@ -153,6 +158,12 @@
           </div>
           <span class="themes-meter__label">Drag, scroll, or use the arrows</span>
         </div>
+      </div>
+    </section>
+
+    <section class="featured" id="featured" aria-labelledby="featured-heading">
+      <div class="featured__layout">
+        <!--PRERENDER:featured-->
       </div>
     </section>
 
