@@ -1,130 +1,87 @@
 # Suhaib Khan Photography Portfolio
 
-Vanilla JS/HTML/CSS landscape photography portfolio. Static site bundled with **Vite** and deployed to GitHub Pages via Actions. No UI framework — just ES modules.
+Vanilla JS/HTML/CSS landscape photography portfolio. Static site bundled with **Vite**, deployed to GitHub Pages via Actions. No UI framework — just ES modules.
 
 ## Architecture
 
-- **Data-driven**: All photos, locations, and categories defined in `data/photos-local.json`, imported directly into JS at build time (no runtime fetch)
-- **Multi-page Vite setup**: `index.html` and `gallery.html` are both Vite entry points with their own thin module entry under `src/pages/`
-- **Single gallery page**: `gallery.html` uses hash routing (`#loc-dubai`, `#mountains`, etc.) to filter by location or category. Append `/p/<1-based-index>` (e.g. `#loc-dubai/p/3`) to deep-link into the lightbox
-- **Split lib modules**: `src/lib/shared.js` (mobile menu, header scroll, scroll reveal, location helpers, paths re-exports, data), `src/lib/home.js` (featured frame only), `src/lib/hero-slideshow.js` (hero slideshow), `src/lib/themes-carousel.js` (themes carousel), `src/lib/atlas-grid.js` (atlas grid), `src/lib/gallery.js` (gallery filters, lightbox). Each section is its own module with its own CSS import. Page entries import only the modules they need so each page ships only its own JS
-- **CSS split**: `shared.js` imports `css/base.css` (custom properties, reset, header/nav, footer, back-to-top, shared utilities — emitted once in the `shared` chunk, linked to both pages); `home.js` imports `css/home.css` (featured frame), `hero-slideshow.js` imports `css/hero-slideshow.css`, `themes-carousel.js` imports `css/themes-carousel.css`, `atlas-grid.js` imports `css/atlas-grid.css` — all four are bundled into `home-app-*.css` via `manualChunks`; `gallery.js` imports `css/gallery.css` → `gallery-app-*.css`. Vite emits one CSS file per chunk so each page only loads what it needs
-- **Static pre-rendering**: a custom Vite plugin (`vite-plugins/prerender-index.js`) reads `data/photos-local.json` at build/dev time and inlines the atlas tiles, theme plates, hero first slide, hero WebP preload links, and the featured frame section into `index.html`. The home page paints real content before any JS runs
+- **Data-driven**: All photos, locations, and categories in `data/photos-local.json`, imported at build time (no runtime fetch)
+- **Multi-page**: `index.html` and `gallery.html` are both Vite entry points; each page imports only its own JS/CSS chunks
+- **Hash routing**: `gallery.html` uses `#loc-dubai`, `#mountains`, etc. to filter; `/p/<N>` suffix deep-links into the lightbox
+- **Static pre-rendering**: `vite-plugins/prerender-index.js` inlines atlas, themes, hero first slide, and featured frame into `index.html` at build/dev time — real content before JS runs
+- **Image pipeline**: three-pass WebP compression (covers 1200px, hero 2400px, logo) via `tools/importer/`, accessible from the TUI
 
 ## File Structure
 
 ```
-index.html                          # Landing page entry; contains PRERENDER:* markers replaced at build time
-gallery.html                        # Gallery page entry
-package.json                        # Vite + scripts (dev / build / preview / import / compress)
-vite.config.js                      # Multi-page input, base: './', manualChunks split, prerender plugin
-vite-plugins/prerender-index.js     # Reads photos-local.json, injects atlas/themes/hero/featured markup into index.html
+index.html                          # Home page; contains <!--PRERENDER:*--> markers
+gallery.html                        # Gallery page
+vite.config.js                      # Multi-page, manualChunks, prerender plugin, ignores tools/
+vite-plugins/prerender-index.js     # Injects atlas/themes/hero/featured into index.html
 src/
-  pages/index.js                    # Index page bootstrap — imports shared.js + home.js + hero-slideshow.js + themes-carousel.js + atlas-grid.js
-  pages/gallery.js                  # Gallery page bootstrap — imports shared.js + gallery.js
-  lib/shared.js                     # Mobile menu, header scroll, scroll reveal, helpers, data import (imports base.css)
-  lib/home.js                       # Featured frame only — initFeatured() (imports home.css)
-  lib/hero-slideshow.js             # Hero slideshow — initHeroSlideshow() (imports hero-slideshow.css)
-  lib/themes-carousel.js            # Themes carousel — initThemesCarousel() (imports themes-carousel.css)
-  lib/atlas-grid.js                 # Atlas grid — initAtlas() (imports atlas-grid.css)
-  lib/atlas-utils.js                # Atlas layout math — pure, Node-safe (shared by atlas-grid.js + prerender plugin)
-  lib/gallery.js                    # Gallery filters, masonry grid, lightbox (imports gallery.css)
-  lib/paths.js                      # imgSrc(), coverWebp(), heroWebp() — Node-safe path helpers
-  lib/templates/prerender.js        # HTML-string renderers used by the Vite plugin
-css/base.css                        # Shared CSS — custom properties, reset, header/nav, footer, back-to-top, utilities
-css/home.css                        # Featured frame CSS only
-css/hero-slideshow.css              # Hero section CSS — Ken Burns, controls, progress bar, responsive
-css/themes-carousel.css             # Themes carousel CSS — plates, nav arrows, meter, responsive
-css/atlas-grid.css                  # Atlas grid CSS — tiles, frames, nav, meter, responsive
-css/gallery.css                     # Gallery-page CSS — intro header, filter bar, masonry grid
-css/lightbox.css                    # Lightbox overlay styles (imported by lightbox.js)
-data/photos-local.json              # Photo / location / category data
-images/logo.png                     # Signature-style logo (PNG fallback)
-images/logo.webp                    # WebP logo (generated by compress:covers, served via <picture>)
-public/images/photos/               # Original full-resolution JPGs (served at runtime)
-public/images/covers/               # 1200px WebP covers — used by atlas / themes / gallery tiles
-public/images/hero/                 # 2400px WebP variants — used by hero slideshow + featured frame main image
-public/.nojekyll                    # Passes through to dist/ root
-scripts/import-local-photos.mjs     # TUI for ingesting new photos into photos-local.json (EXIF + AI copy)
-scripts/compress-covers.mjs         # Generates covers/, hero/, and logo.webp — three passes
+  pages/index.js                    # Home bootstrap
+  pages/gallery.js                  # Gallery bootstrap
+  lib/shared.js                     # Mobile menu, scroll, helpers, data import (→ base.css)
+  lib/home.js                       # Featured frame — initFeatured() (→ home.css)
+  lib/hero-slideshow.js             # Hero slideshow — initHeroSlideshow() (→ hero-slideshow.css)
+  lib/themes-carousel.js            # Themes carousel — initThemesCarousel() (→ themes-carousel.css)
+  lib/atlas-grid.js                 # Atlas grid — initAtlas() (→ atlas-grid.css)
+  lib/atlas-utils.js                # Atlas layout math — pure, Node-safe
+  lib/gallery.js                    # Gallery filters, masonry, lightbox (→ gallery.css)
+  lib/paths.js                      # imgSrc(), coverWebp(), heroWebp() — Node-safe
+  lib/templates/prerender.js        # HTML-string renderers for the Vite plugin
+css/                                # One CSS file per module, bundled per chunk by Vite
+data/photos-local.json              # Source of truth for all photo/location/category data
+images/logo.png                     # PNG logo fallback
+images/logo.webp                    # WebP logo (generated by tools)
+public/images/photos/               # Original full-res JPGs
+public/images/covers/               # 1200px WebP covers (atlas, themes, gallery, thumbnails)
+public/images/hero/                 # 2400px WebP variants (hero slideshow, featured frame)
+tools/importer/                     # Separate npm project — fullscreen React Ink TUI
+  index.mjs                         # Entry: resolves portfolio root, renders Ink app
+  app.jsx                           # Root app — phase state machine
+  components/                       # Header, MainMenu, LightroomSync, PhotoWizard, CompressScreen, steps/, ui/
+  hooks/                            # dataFile.js, useExif.js
+  utils/                            # compress.js (sharp), ai.js, slug.js
+  package.json                      # Tool deps: ink, react, sharp, ai SDK, exifr, tsx
 .github/workflows/deploy.yml        # Build + deploy on push to main
 ```
-
-## Key Design Decisions
-
-- **Fonts**: EB Garamond (display/headings) + Alegreya Sans (body/nav) via Google Fonts — old-style print aesthetic
-- **Logo**: `<picture>` with WebP source (`images/logo.webp`) + PNG fallback (`images/logo.png`). CSS `filter: invert(1)` whitens it over hero, reverts on scroll
-- **Hero**: Cinematic slideshow with Ken Burns effect (5 motion patterns), progress bar, image title + location labels, vertical side text. First slide is **pre-rendered into `index.html`** with a `<picture>` (mobile WebP via media-query source, desktop WebP, JPG fallback). `<link rel="preload" as="image">` tags in `<head>` start the LCP image download before the parser hits the script. Slides 1..N are built by JS with `data-src`/`data-srcset` deferred — they're loaded **sequentially** by a preload chain that kicks off after the active slide is on screen, so the LCP image doesn't share bandwidth. Slide transitions are **gated on `img.complete`** — if the next image isn't ready when the 8 s timer fires, the slideshow holds on the current slide and the progress bar pauses until the image arrives (8 s hard cap so stalled fetches can't freeze the slideshow)
-- **Header**: Transparent over hero (120px), shrinks to 80px/70px logo on scroll. Gallery page uses solid 80px header
-- **Nav**: Home page — Places, Themes, Featured, Gallery, Follow (Instagram). Gallery page — Home, Gallery, Follow
-- **Locations section** (atlas): Editorial layout — asymmetric grid (featured tall card + smaller cards), scroll-reveal animations. Each tile renders a `<picture>` with the WebP cover (`images/covers/<name>.webp`) plus the original JPG as the `<img>` fallback. **Pre-rendered into `index.html`** at build time
-- **Categories section** (themes): Grid of thematic category cards. Same `<picture>` + WebP cover pattern as the atlas. **Pre-rendered into `index.html`** at build time
-- **Featured Frame section**: Editorial showcase between themes and the Instagram CTA. **Pre-rendered into `index.html`** at build time via `<!--PRERENDER:featured-->`. Shows photos with `featured: true` in **reverse JSON order** (latest first). Main image loads from `public/images/hero/` (2400px WebP) displayed in a fixed **16:10 frame** with `object-fit: contain` so section height never changes between photos. Thumbnails (up to 3) use cover WebPs; clicking a thumb swaps it into the main frame (cross-fade, no navigation) and the previously-main photo rotates into the thumb slot. `initFeatured()` in `src/lib/home.js` handles the swap — each element carries `data-href`, `data-webp-cover`, `data-webp-hero`, `data-title`, `data-description`, `data-loc-tag`, `data-loc-full`, `data-width`, `data-height`. The CTA and main image click navigate to `gallery.html#p/<N>` which deep-links into the lightbox. A `+N` tile links to the full gallery when more than 4 featured photos exist
-- **Gallery filter bar**: Toggle between Locations/Categories mode with pill-style filter buttons. Syncs with hash routing
-- **Gallery masonry**: CSS `column-count` (3/2/1 responsive), not JS-based. Each tile is a `<picture>` (WebP cover + JPG fallback). First 6 tiles load eagerly; the rest are lazy-loaded by an `IntersectionObserver` that swaps both `source.srcset` and `img.src` together via `dataset.webp` / `dataset.src`
-- **Lightbox**: Keyboard (Escape/arrows) + touch swipe support. URL-synced via `/p/<1-based-index>` suffix on the filter hash — opening a photo `pushState`s a history entry (so browser back closes the lightbox), prev/next `replaceState` so each photo is shareable without polluting history. Deep-link loads open without pushing; close cleans the URL via `replaceState`. **Close button behaviour**: if `pushedByUs` (user opened from a gallery tile), `history.back()` pops the entry we added. If the page was deep-linked from another page on the same origin (detected via `document.referrer`), `history.back()` returns to the referring page (e.g. home). Otherwise the lightbox closes in place and the URL is cleaned. The first `initLightbox` call wires controls and stashes a re-binder on `lightbox.__rebindTriggers` so subsequent re-renders only rebind fresh figures. Loads the original full-res JPG for full-bleed viewing. A center-stage `.lightbox__spinner` appears with a 150ms delay while the next image fetches — skipped for cached images
-- **Instagram CTA**: Simple link to @suhaib_s_khan, no API
 
 ## photos-local.json Schema
 
 ```json
 {
-  "locations": [{ "id": "dubai", "name": "Dubai, UAE", "shortName": "Dubai", "description": "...", "cover": "images/photos/_DSC0791.jpg" }],
-  "categories": [{ "id": "mountains", "name": "Mountains", "description": "...", "cover": "images/photos/DSC02188.jpg" }],
+  "locations": [{ "id": "dubai", "name": "Dubai, UAE", "shortName": "Dubai", "description": "...", "cover": "images/photos/file.jpg" }],
+  "categories": [{ "id": "mountains", "name": "Mountains", "description": "...", "cover": "images/photos/file.jpg" }],
   "photos": [{
-    "title": "...",
-    "description": "...",
+    "title": "...", "description": "...",
     "src": "images/photos/_DSC0791.jpg",
     "width": 1840, "height": 1166,
     "location": "dubai",
     "categories": ["cityscape"],
-    "hero": true,
-    "mobileHero": false,
-    "featured": false,
+    "hero": true, "mobileHero": false, "featured": false,
     "metadata": { "camera": "SONY ILCE-6400", "iso": 100, "aperture": "f/8", "shutterSpeed": "1/125s", "focalLength": "87mm" }
   }]
 }
 ```
 
-- `src` / `cover`: Repo-relative paths (e.g. `images/photos/_DSC0791.jpg`) resolved by Vite from `public/` at runtime
-- WebP covers (1200px max edge) live at `public/images/covers/<name>.webp` — used by atlas, themes, gallery tiles, and featured thumbnails. `coverWebp()` in `src/lib/paths.js` derives the cover path from the original `src` by swapping `/photos` → `/covers` and `.jpg` → `.webp`
-- WebP hero variants (2400px max edge, q=85) live at `public/images/hero/<name>.webp` — used by the hero slideshow and the **featured frame main image**. `heroWebp()` in `src/lib/paths.js` follows the same pattern but swaps to `/hero`. Generated for photos with `hero === true`, `mobileHero === true`, or `featured === true`
-- `hero` / `mobileHero`: Controls which photos appear in the hero slideshow per viewport
-- `featured`: Controls which photos appear in the Featured Frame section. Displayed in reverse JSON order (latest first)
-- `locations[].shortName`: Compact label used for UI contexts that need shorter text
-- `photos[].location`: Matches `locations[].id` for filtering and lookup
-- `photos[].metadata`: EXIF extracted by `import-local-photos.mjs` — surfaced in the lightbox spec list
-- A photo can belong to multiple categories
-- Gallery hash routing: `#loc-dubai` for locations, `#mountains` for categories; optional `/p/<N>` suffix opens the lightbox at the Nth photo of the active filter (e.g. `#mountains/p/2`, `#p/5` for all-photos). The 1-based index N in "all photos" mode equals `photos.length - originalIndex` because `renderGrid` reverses the array
-
-## Performance
-
-- **Image pipeline** (`scripts/compress-covers.mjs`, run via `npm run compress:covers`):
-  - Pass 1 — **covers** at 1200px / q=80 → `public/images/covers/<name>.webp` for every photo + every location/category cover. Used by atlas, themes, gallery masonry, featured thumbnails
-  - Pass 2 — **hero** at 2400px / q=85 → `public/images/hero/<name>.webp` for photos with `hero`, `mobileHero`, or `featured` true. Used by the hero slideshow and featured frame main image
-  - Pass 3 — **logo** → `images/logo.webp` (q=90). Used in HTML via `<picture>`
-  - All passes are idempotent (skip when output is newer than source); pass `-- --force` to re-encode everything
-- **Static pre-rendering**: `vite-plugins/prerender-index.js` runs in both `serve` (dev) and `build`. For `index.html` only (gallery is left alone), it replaces six `<!--PRERENDER:*-->` markers: atlas grid, themes track, hero first slide, hero title/location text, `<link rel="preload">` tags for the hero WebP, and the **featured frame** section content. In dev mode, changes to `data/photos-local.json` trigger a full reload
-- **Hero LCP**: Preload links in `<head>` start the WebP download before the parser hits the script tag. The pre-rendered first slide uses `<picture>` with mobile-WebP, desktop-WebP, and JPG fallback so the browser fetches the right resolution natively. Sequential preload chain ensures slides 1..N download one at a time after slide 0 is on screen — the LCP image isn't starved of bandwidth, and slide transitions wait on `img.complete` so the user never sees a half-loaded frame
-- **JS split**: `vite.config.js` uses `manualChunks` to keep `shared`, `home-app`, and `gallery-app` in separate chunks. `home-app` covers `home.js`, `hero-slideshow.js`, `themes-carousel.js`, `atlas-grid.js`, and `atlas-utils.js`. Index loads `shared + home-app`; gallery loads `shared + gallery-app`. Neither page downloads the other's code
-- **CSS chunks**: `shared.js` imports `css/base.css` → emitted as `shared-*.css` (~25 KB / ~5.4 KB gzip, served to both pages). The four home-page modules (`home.js`, `hero-slideshow.js`, `themes-carousel.js`, `atlas-grid.js`) each import their own CSS → all consolidated into `home-app-*.css` (~33 KB / ~6 KB gzip). `gallery.js` imports `css/gallery.css` → `gallery-app-*.css` (~6 KB / ~1.7 KB gzip). Vite emits one CSS file per chunk so each page only loads what it needs
-- **Atlas / themes / gallery masonry**: `<picture>` with `<source type="image/webp">` + the original JPG as `<img>` fallback. Lightbox uses the original JPG (via `dataset.full`) for high-res viewing
-- **Loading hints**: Native `loading="lazy"` on below-fold images. `fetchpriority="high"` on the first hero image and the atlas hero tile. `decoding="async"` everywhere. System font fallbacks; Google Fonts with `display=swap`. `preconnect` to fonts.googleapis.com / fonts.gstatic.com. `prefers-reduced-motion` disables all animations (including the lightbox spinner)
-- **Build output**: Vite bundles + minifies + hashes CSS/JS/logo for long-term caching; `photos-local.json` is bundled into the JS chunk so the gallery renders synchronously
+- `src` / `cover`: repo-relative paths under `public/` (e.g. `images/photos/file.jpg`)
+- `coverWebp()` / `heroWebp()` in `src/lib/paths.js` derive WebP paths from `src`
+- `hero` / `mobileHero`: controls hero slideshow inclusion per viewport
+- `featured`: controls Featured Frame section; displayed in reverse JSON order
+- Gallery hash routing: `#loc-<id>` for locations, `#<id>` for categories; `/p/<N>` opens lightbox
 
 ## Local Development
 
 ```bash
-npm install              # first time
-npm run dev              # starts Vite dev server on http://localhost:5173 with HMR
-npm run build            # production build into dist/
-npm run preview          # serve the built dist/ locally to sanity-check
-npm run import:local-photos    # TUI to add new images from public/images/photos/ into photos-local.json
-npm run compress:covers        # (re)generate covers/, hero/, and logo.webp; pass -- --force to re-encode
+npm install          # website deps (just vite)
+npm run dev          # Vite dev server on http://localhost:5173
+npm run build        # production build → dist/
+npm run preview      # serve dist/ locally
+npm run tools        # fullscreen TUI — import photos + compress images
 ```
+
+`tools/` deps install automatically on first `npm run tools` run.
 
 ## Deployment
 
-GitHub Actions (`.github/workflows/deploy.yml`) builds on every push to `main` and deploys `dist/` via the official Pages actions. Set repo Settings > Pages > Source to **GitHub Actions** (not "Deploy from a branch") for this to take effect.
-
-`vite.config.js` uses `base: './'` so the build is portable — works whether deployed at the root or under a project sub-path (e.g. `username.github.io/photo-portfolio/`) without changing config.
+GitHub Actions builds on push to `main` and deploys `dist/`. Set Pages source to **GitHub Actions** in repo settings. `base: './'` in vite.config.js makes the build path-agnostic.
