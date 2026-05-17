@@ -144,16 +144,6 @@ export function initHeroSlideshow(data) {
     });
   }
 
-  // Load slides one at a time, in order — each fetch waits for the previous
-  // to finish so the active slide isn't starved of bandwidth.
-  async function preloadChain() {
-    for (let i = 1; i < slides.length; i += 1) {
-      ensureLoading(i);
-      const img = slides[i].querySelector('img');
-      await whenImageReady(img);
-    }
-  }
-
   function advance(dir) {
     const nextIndex = (current + dir + slides.length) % slides.length;
     ensureLoading(nextIndex);
@@ -167,6 +157,7 @@ export function initHeroSlideshow(data) {
       restartKenBurns(slides[current]);
       slides[current].classList.add('active');
       updateUI(current);
+      ensureLoading((current + 1) % slides.length);
     });
   }
 
@@ -250,9 +241,7 @@ export function initHeroSlideshow(data) {
     });
   }
 
-  // Start sequential preload of slides 1..N once the active slide is on screen,
-  // so the LCP image doesn't share bandwidth with the rest.
-  whenImageReady(slides[0].querySelector('img')).then(() => preloadChain());
+  whenImageReady(slides[0].querySelector('img')).then(() => ensureLoading(1 % slides.length));
 
   startTimer();
 

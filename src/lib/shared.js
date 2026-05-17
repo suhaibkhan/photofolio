@@ -65,7 +65,7 @@ export function initHeaderScroll() {
 }
 
 export function initScrollReveal() {
-  const reveals = document.querySelectorAll('.reveal, .themes-stage, .atlas-tile');
+  const reveals = document.querySelectorAll('.reveal, .themes-stage, .atlas__grid');
   if (!reveals.length) return;
 
   const observer = new IntersectionObserver((entries) => {

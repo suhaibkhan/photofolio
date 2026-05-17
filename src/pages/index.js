@@ -12,6 +12,10 @@ import {
   initFeatured,
 } from '../lib/home.js';
 
+if (import.meta.env.DEV) {
+  import('../lib/dev/font-switcher.js').then(m => m.init());
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initHeaderScroll();

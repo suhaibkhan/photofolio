@@ -17,7 +17,8 @@ const ROOT = process.cwd();
 const ENV_MODE = process.env.NODE_ENV || "development";
 dotenvFlow.config({ path: ROOT, node_env: ENV_MODE });
 
-const PHOTOS_DIR = path.join(ROOT, "images", "photos");
+const PHOTOS_DIR     = path.join(ROOT, "public", "images", "photos");
+const LIGHTROOM_DIR  = "/Users/suhaibkhan/Pictures/Lightroom Catalogs/Lightroom Exports/Web";
 const DATA_PATH = path.join(ROOT, "data", "photos-local.json");
 const AI_MODEL_ID = process.env.LOCAL_PHOTO_AI_MODEL || "gemini-3-flash-preview";
 const vertex = createVertex({ apiKey: process.env.GOOGLE_VERTEX_API_KEY });
@@ -624,10 +625,87 @@ async function chooseCategories(data) {
   return [...selectedIds];
 }
 
+// ─── Lightroom export sync ────────────────────────────────────────────────────
+
+async function checkLightroomExports() {
+  // Silently skip if the Lightroom exports folder doesn't exist
+  try {
+    await fs.access(LIGHTROOM_DIR);
+  } catch {
+    return;
+  }
+
+  const [lrEntries, destEntries] = await Promise.all([
+    fs.readdir(LIGHTROOM_DIR, { withFileTypes: true }),
+    fs.readdir(PHOTOS_DIR,    { withFileTypes: true }).catch(() => []),
+  ]);
+
+  const destNames = new Set(
+    destEntries.filter((e) => e.isFile()).map((e) => e.name)
+  );
+  const newFiles = lrEntries
+    .filter((e) => e.isFile() && SUPPORTED_EXTENSIONS.has(path.extname(e.name).toLowerCase()))
+    .map((e) => e.name)
+    .filter((name) => !destNames.has(name))
+    .sort((a, b) => a.localeCompare(b));
+
+  if (!newFiles.length) {
+    printNote(
+      `  ${pc.dim("No new exports found in")} ${pc.dim(path.basename(LIGHTROOM_DIR))}`,
+      "Lightroom"
+    );
+    return;
+  }
+
+  console.log(
+    boxen(
+      [
+        `  ${pc.bold("Source:")}  ${pc.dim(LIGHTROOM_DIR)}`,
+        `  ${pc.bold("New:")}     ${pc.cyan(pc.bold(String(newFiles.length)))} file${newFiles.length !== 1 ? "s" : ""} not yet in photos/`,
+        "",
+        ...newFiles.map((n) => `  ${pc.dim("·")}  ${n}`),
+      ].join("\n"),
+      {
+        title: pc.bold(`  Lightroom Exports  `),
+        padding: { top: 1, bottom: 1, left: 0, right: 2 },
+        borderStyle: "round",
+        borderColor: "magenta",
+        margin: { top: 0, bottom: 1 },
+      }
+    )
+  );
+
+  const selected = await safeEnquirer({
+    type: "multiselect",
+    name: "value",
+    message: `Select files to copy to photos/  ${pc.dim("(space to toggle, a to toggle all, enter to confirm)")}`,
+    choices: newFiles.map((name) => ({ name, message: name, enabled: true })),
+  });
+
+  if (!selected.length) {
+    printNote("No files selected — skipping Lightroom copy.", "Skipped");
+    return;
+  }
+
+  const copySpinner = ora({ text: `Copying ${selected.length} file${selected.length !== 1 ? "s" : ""}…`, color: "magenta" }).start();
+  let copied = 0;
+  for (const name of selected) {
+    await fs.copyFile(
+      path.join(LIGHTROOM_DIR, name),
+      path.join(PHOTOS_DIR,    name)
+    );
+    copied += 1;
+    copySpinner.text = `Copying ${copied}/${selected.length}  ${pc.dim(name)}`;
+  }
+  copySpinner.succeed(`Copied ${copied} file${copied !== 1 ? "s" : ""} → ${pc.dim("public/images/photos/")}`);
+}
+
 // ─── Main flow ────────────────────────────────────────────────────────────────
 
 async function importPhotos() {
   printBanner();
+
+  await checkLightroomExports();
 
   const data     = await readData();
   const files    = await getPhotoFiles();

@@ -41,6 +41,18 @@
       "id": "jordan",
       "description": "Ancient Nabataean rose cities and Martian desert dunes meet the salt-rich shores of the Dead Sea",
       "cover": "images/photos/DSCF0306.jpg"
+    },
+    {
+      "name": "Austria",
+      "shortName": "Austria",
+      "id": "austria",
+      "description": "Majestic alpine vistas and Baroque spires meet the musical legacy of the Old Town"
+    },
+    {
+      "name": "Finland",
+      "shortName": "Finland",
+      "id": "finland",
+      "description": "Midnight sun and frozen wilderness meet the serene tranquility of a thousand pristine lakes"
     }
   ],
   "categories": [
@@ -1046,6 +1058,67 @@
         "aperture": "f/7.1",
         "shutterSpeed": "1/250s",
         "focalLength": "16mm"
+      }
+    },
+    {
+      "title": "A Fairytale Shrouded in Alpine Mist",
+      "description": "Neuschwanstein Castle rises through a heavy morning fog, its white spires standing in stark contrast against the rugged, snow-dusted cliffs of Germany.",
+      "src": "images/photos/DSC01498.jpg",
+      "width": 1638,
+      "height": 2048,
+      "location": "germany",
+      "categories": [
+        "landscape",
+        "nature"
+      ],
+      "hero": false,
+      "mobileHero": true,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 250,
+        "aperture": "f/8",
+        "shutterSpeed": "1/125s",
+        "focalLength": "86mm"
+      }
+    },
+    {
+      "title": "Historic Spires Above the Salzach River",
+      "description": "The Salzach River winds through the historic heart of Salzburg, where baroque domes and copper spires glow under a soft, pastel sky.",
+      "src": "images/photos/DSC01552.jpg",
+      "width": 2048,
+      "height": 1487,
+      "location": "austria",
+      "categories": [
+        "cityscape"
+      ],
+      "hero": false,
+      "mobileHero": false,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 250,
+        "aperture": "f/7.1",
+        "shutterSpeed": "1/250s",
+        "focalLength": "87mm"
+      }
+    },
+    {
+      "title": "Golden Lights in the Arctic Forest",
+      "description": "Warm holiday lights glow against a traditional Finnish lavvu and wooden cabin in the snowy woods of Rovaniemi. The silent birch trees stand tall under a heavy blanket of Arctic winter.",
+      "src": "images/photos/DSC01584.jpg",
+      "width": 1638,
+      "height": 2048,
+      "location": "finland",
+      "categories": [
+        "nature"
+      ],
+      "hero": false,
+      "mobileHero": true,
+      "metadata": {
+        "camera": "SONY ILCE-7M4",
+        "iso": 500,
+        "aperture": "f/4.5",
+        "shutterSpeed": "1/200s",
+        "focalLength": "32mm"
       }
     }
   ]
