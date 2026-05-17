@@ -14,6 +14,15 @@ import { ReviewStep } from './steps/ReviewStep.jsx';
 
 const STEP_COUNT = 6;
 
+const STEP_HINTS = [
+  [{ key: '↑↓', label: 'navigate' }, { key: 'Enter', label: 'select' }, { key: '^C', label: 'quit' }],
+  [{ key: '↑↓', label: 'navigate' }, { key: 'Enter', label: 'select' }, { key: 'Esc', label: 'back' }, { key: '^C', label: 'quit' }],
+  [{ key: '↑↓', label: 'navigate' }, { key: 'Space', label: 'toggle' }, { key: 'Enter', label: 'confirm' }, { key: 'Esc', label: 'back' }],
+  [{ key: '↑↓', label: 'navigate' }, { key: 'Enter', label: 'select' }, { key: 'Esc', label: 'back' }],
+  [{ key: '↑↓', label: 'navigate' }, { key: 'Space', label: 'toggle' }, { key: 'Enter', label: 'confirm' }, { key: 'Esc', label: 'back' }],
+  [{ key: 'Enter', label: 'save' }, { key: 'Esc', label: 'back' }, { key: '^C', label: 'quit' }],
+];
+
 const EMPTY_CHOICES = {
   location:      null,
   locationLabel: null,
@@ -157,7 +166,7 @@ export function PhotoWizard({
         )}
       </Box>
 
-      <KeyHints />
+      <KeyHints hints={STEP_HINTS[step]} />
     </Box>
   );
 }

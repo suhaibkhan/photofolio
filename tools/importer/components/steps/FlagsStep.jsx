@@ -42,9 +42,6 @@ export function FlagsStep({ defaultFlags = {}, onSubmit, onBack }) {
           );
         })}
       </Box>
-      <Box marginTop={1}>
-        <Text dimColor>↑↓ move  ·  Space toggle  ·  Enter confirm  ·  ← back</Text>
-      </Box>
     </Box>
   );
 }

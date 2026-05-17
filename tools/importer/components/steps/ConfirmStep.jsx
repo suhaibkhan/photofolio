@@ -9,7 +9,7 @@ const OPTIONS = [
 
 export function ConfirmStep({ onConfirm }) {
   function handleSelect(opt) {
-    if (!opt) return; // ← / Esc — nothing to go back to on step 0
+    if (!opt) return;
     onConfirm(opt.value === 'yes');
   }
 

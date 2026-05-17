@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { Box, Text, useApp } from 'ink';
+import { Box, Text, useApp, useInput } from 'ink';
+import { KeyHints } from './components/ui/KeyHints.jsx';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { getDataPath, readData, writeData } from './hooks/dataFile.js';
@@ -9,6 +10,21 @@ import { LightroomSync } from './components/LightroomSync.jsx';
 import { PhotoWizard } from './components/PhotoWizard.jsx';
 import { SummaryScreen } from './components/SummaryScreen.jsx';
 import { CompressScreen } from './components/CompressScreen.jsx';
+
+function NoPhotosScreen({ onBack }) {
+  useInput((input, key) => {
+    if (key.escape || key.leftArrow || key.return) onBack();
+  });
+  return (
+    <Box flexDirection="column">
+      <Box padding={1} flexDirection="column">
+        <Text>No new photos found in <Text bold>public/images/photos/</Text></Text>
+        <Text dimColor>Add photos to that folder and re-run import.</Text>
+      </Box>
+      <KeyHints hints={[{ key: 'Esc', label: 'back to menu' }, { key: '^C', label: 'quit' }]} />
+    </Box>
+  );
+}
 
 const PHOTOS_DIR_REL = path.join('public', 'images', 'photos');
 const LIGHTROOM_DIR  = '/Users/suhaibkhan/Pictures/Lightroom Catalogs/Lightroom Exports/Web';
@@ -118,6 +134,14 @@ export default function App({ root, startCompress = false, force = false }) {
     setPhase(files.length > 0 ? 'wizard' : 'menu');
   }, [dataPath, photosDir]);
 
+  const handleLightroomSkip = useCallback(() => {
+    setPhase('wizard');
+  }, []);
+
+  const handleLightroomBack = useCallback(() => {
+    setPhase('menu');
+  }, []);
+
   // ── Render ───────────────────────────────────────────────────────────────────
 
   if (loadError) {
@@ -150,7 +174,18 @@ export default function App({ root, startCompress = false, force = false }) {
           lightroomDir={LIGHTROOM_DIR}
           photosDir={photosDir}
           onDone={handleLightroomDone}
+          onSkip={handleLightroomSkip}
+          onBack={handleLightroomBack}
         />
+      </Box>
+    );
+  }
+
+  if (phase === 'wizard' && newFiles.length === 0) {
+    return (
+      <Box flexDirection="column">
+        <Header />
+        <NoPhotosScreen onBack={() => setPhase('menu')} />
       </Box>
     );
   }

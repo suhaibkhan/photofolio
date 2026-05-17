@@ -2,7 +2,7 @@ import { generateText } from 'ai';
 import { createVertex } from '@ai-sdk/google-vertex';
 import fs from 'node:fs/promises';
 
-const DEFAULT_MODEL_ID = 'gemini-2.0-flash';
+const DEFAULT_MODEL_ID = 'gemini-3-flash-preview';
 
 const SYSTEM_PROMPT = [
   'You are a photography copywriter for travel, nature, and landscape images.',

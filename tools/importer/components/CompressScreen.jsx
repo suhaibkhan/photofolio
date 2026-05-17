@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Text, useInput, useApp } from 'ink';
+import { Box, Text, useInput } from 'ink';
+import { KeyHints } from './ui/KeyHints.jsx';
 import Spinner from 'ink-spinner';
 import path from 'node:path';
 import fs from 'node:fs/promises';
@@ -42,7 +43,6 @@ function PassSummary({ label, results }) {
 }
 
 export function CompressScreen({ root, force, onDone }) {
-  const { exit } = useApp();
   const [phase, setPhase]           = useState('loading');
   const [currentFile, setCurrentFile] = useState('');
   const [coverResults, setCoverResults] = useState([]);
@@ -53,8 +53,7 @@ export function CompressScreen({ root, force, onDone }) {
 
   useInput((input, key) => {
     if (phase === 'done' || phase === 'error') {
-      if (input === 'q') exit();
-      else if (key.return || key.escape || key.leftArrow) onDone();
+      if (key.return || key.escape || key.leftArrow) onDone();
     }
   });
 
@@ -118,12 +117,16 @@ export function CompressScreen({ root, force, onDone }) {
     return <Box padding={1}><Text dimColor>Loading photo data…</Text></Box>;
   }
 
+  const HINTS_DONE = [{ key: 'Enter/Esc', label: 'back to menu' }, { key: '^C', label: 'quit' }];
+
   if (phase === 'error') {
     return (
-      <Box padding={1} flexDirection="column">
-        <Text color="red" bold>✖ Compression failed</Text>
-        <Text dimColor>{error}</Text>
-        <Box marginTop={1}><Text dimColor>Enter / ← back to menu   q quit</Text></Box>
+      <Box flexDirection="column">
+        <Box padding={1} flexDirection="column">
+          <Text color="red" bold>✖ Compression failed</Text>
+          <Text dimColor>{error}</Text>
+        </Box>
+        <KeyHints hints={HINTS_DONE} />
       </Box>
     );
   }
@@ -180,11 +183,7 @@ export function CompressScreen({ root, force, onDone }) {
         </Box>
       )}
 
-      {phase === 'done' && (
-        <Box marginTop={1}>
-          <Text dimColor>Enter / ← back to menu   q quit</Text>
-        </Box>
-      )}
+      {phase === 'done' && <KeyHints hints={HINTS_DONE} />}
     </Box>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Text } from 'ink';
+import { Box, Text, useInput } from 'ink';
 import TextInput from 'ink-text-input';
 import { MultiSelectInput } from '../ui/MultiSelectInput.jsx';
 import { SelectInput } from '../ui/SelectInput.jsx';
@@ -33,6 +33,12 @@ export function CategoryStep({ data, defaultSelected = [], onSubmit, onBack, onD
   const [chosen, setChosen] = useState(new Set(defaultSelected));
   const [formDraft, setFormDraft] = useState({});
   const [formStep, setFormStep] = useState('name');
+
+  useInput((input, key) => {
+    if (key.escape && (mode === 'form-name' || mode === 'form-id' || mode === 'form-desc')) {
+      setMode('add-prompt');
+    }
+  });
 
   const catOptions = data.categories.map((c) => ({ value: c.id, label: c.name }));
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Text } from 'ink';
+import { Box, Text, useInput } from 'ink';
 import TextInput from 'ink-text-input';
 import { SelectInput } from '../ui/SelectInput.jsx';
 import { Panel } from '../ui/Panel.jsx';
@@ -26,6 +26,10 @@ function Field({ label, placeholder, defaultValue = '', required, onSubmit }) {
 export function LocationStep({ data, onSelect, onBack, onDataChange }) {
   const [mode, setMode] = useState('select'); // 'select' | 'form-name' | 'form-shortname' | 'form-id' | 'form-desc'
   const [draft, setDraft] = useState({});
+
+  useInput((input, key) => {
+    if (key.escape && mode !== 'select') setMode('select');
+  });
 
   const existingOptions = data.locations.map((loc) => ({
     value: loc.id,

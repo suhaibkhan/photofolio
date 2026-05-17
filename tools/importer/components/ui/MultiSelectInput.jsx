@@ -41,9 +41,6 @@ export function MultiSelectInput({ options, defaultSelected = [], onSubmit, onBa
           </Box>
         );
       })}
-      <Box marginTop={1}>
-        <Text dimColor>↑↓ move  ·  Space toggle  ·  Enter confirm  ·  ← back</Text>
-      </Box>
     </Box>
   );
 }

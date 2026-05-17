@@ -24,9 +24,6 @@ export function SelectInput({ options, onSelect, initialIndex = 0 }) {
           </Box>
         );
       })}
-      <Box marginTop={1}>
-        <Text dimColor>↑↓ move  ·  Enter select  ·  ← back</Text>
-      </Box>
     </Box>
   );
 }

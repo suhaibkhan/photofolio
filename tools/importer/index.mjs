@@ -10,7 +10,7 @@ import App from './app.jsx';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT      = path.resolve(__dirname, '..', '..');
 
-dotenvFlow.config({ path: ROOT, node_env: process.env.NODE_ENV || 'development' });
+dotenvFlow.config();
 
 const startCompress = process.argv.includes('--compress');
 const force         = process.argv.includes('--force');

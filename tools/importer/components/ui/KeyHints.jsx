@@ -4,7 +4,7 @@ import { Box, Text } from 'ink';
 const DEFAULT_HINTS = [
   { key: '↑↓', label: 'navigate' },
   { key: 'Enter', label: 'select' },
-  { key: '←/Esc', label: 'back' },
+  { key: 'Esc', label: 'back' },
   { key: '^C', label: 'quit' },
 ];
 

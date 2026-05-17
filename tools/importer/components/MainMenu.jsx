@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Text } from 'ink';
 import { SelectInput } from './ui/SelectInput.jsx';
+import { KeyHints } from './ui/KeyHints.jsx';
 
 export function MainMenu({ newPhotoCount, onSelect }) {
   const options = [
@@ -19,11 +20,14 @@ export function MainMenu({ newPhotoCount, onSelect }) {
   ];
 
   return (
-    <Box flexDirection="column" paddingX={1} paddingTop={1}>
-      <Text bold color="cyan">What would you like to do?</Text>
-      <Box marginTop={1}>
-        <SelectInput options={options} onSelect={(opt) => opt && onSelect(opt.value)} />
+    <Box flexDirection="column">
+      <Box flexDirection="column" paddingX={1} paddingTop={1}>
+        <Text bold color="cyan">What would you like to do?</Text>
+        <Box marginTop={1}>
+          <SelectInput options={options} onSelect={(opt) => opt && onSelect(opt.value)} />
+        </Box>
       </Box>
+      <KeyHints hints={[{ key: '↑↓', label: 'navigate' }, { key: 'Enter', label: 'select' }, { key: '^C', label: 'quit' }]} />
     </Box>
   );
 }

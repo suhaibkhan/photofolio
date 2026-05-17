@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Text } from 'ink';
+import { Box, Text, useInput } from 'ink';
 import TextInput from 'ink-text-input';
 import Spinner from 'ink-spinner';
 import { SelectInput } from '../ui/SelectInput.jsx';
@@ -47,6 +47,11 @@ export function CopyStep({
   const [aiResult, setAiResult] = useState(null);
   const [error, setError] = useState(null);
   const [manualTitle, setManualTitle] = useState('');
+  const TEXT_BACK = { notes: 'method', 'manual-title': 'method', 'manual-desc': 'manual-title', 'refine-notes': 'review' };
+  useInput((input, key) => {
+    if (key.escape && TEXT_BACK[mode]) setMode(TEXT_BACK[mode]);
+  });
+
   const [model] = useState(() => {
     try { return createAiModel(); } catch { return null; }
   });
