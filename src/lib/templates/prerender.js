@@ -1,6 +1,5 @@
 import { imgSrc, coverWebp, heroWebp } from '../paths.js';
-
-const ATLAS_SLOTS = ['hero', 'side1', 'side2', 'footL', 'footM', 'footR'];
+import { ATLAS_PAGE_SIZE, slotsForCount, computeAtlasFrames } from '../atlas-utils.js';
 
 const ARROW_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
 
@@ -75,40 +74,48 @@ export function renderAtlasHtml(data) {
     return { loc, photo };
   }).filter((x) => x.photo);
 
-  return entries.map((entry, i) => {
-    const slot = ATLAS_SLOTS[i] || `extra${i}`;
-    const isHero = slot === 'hero';
-    const { loc, photo } = entry;
+  const frames = computeAtlasFrames(entries, ATLAS_PAGE_SIZE);
 
-    const sizes = isHero
-      ? '(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 60vw'
-      : '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 30vw';
+  return frames.map((frame, frameIdx) => {
+    const slots = slotsForCount(frame.length);
+    const tiles = frame.map((entry, relIdx) => {
+      const slot = slots[relIdx];
+      const isHero = slot === 'hero' || slot === 'solo' || slot === 'half-L' || slot === 'half-R';
+      const { loc, photo } = entry;
+      const globalIdx = frameIdx * ATLAS_PAGE_SIZE + relIdx;
 
-    const loading = i < 2 ? 'eager' : 'lazy';
-    const fetchAttr = isHero ? ' fetchpriority="high"' : '';
+      const sizes = isHero
+        ? '(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 60vw'
+        : '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 30vw';
 
-    const photoCount = photos.filter((p) => p.location === loc.id).length;
-    const countLabel = `${photoCount} ${photoCount === 1 ? 'PHOTO' : 'PHOTOS'}`;
+      const loading = globalIdx < 2 ? 'eager' : 'lazy';
+      const fetchAttr = (globalIdx === 0) ? ' fetchpriority="high"' : '';
 
-    const descHtml = loc.description
-      ? `<p class="atlas-tile__desc">${esc(loc.description)}</p>`
-      : '';
+      const photoCount = photos.filter((p) => p.location === loc.id).length;
+      const countLabel = `${photoCount} ${photoCount === 1 ? 'PHOTO' : 'PHOTOS'}`;
 
-    return `<a href="gallery.html#loc-${esc(loc.id)}" class="atlas-tile" data-tile="${esc(slot)}">`
-      + `<picture>`
-      + `<source type="image/webp" srcset="${esc(coverWebp(photo.src))}">`
-      + `<img src="${esc(imgSrc(photo.src))}" sizes="${sizes}" alt="${esc(loc.name)} — ${esc(photo.title)}" width="${photo.width}" height="${photo.height}" loading="${loading}" decoding="async"${fetchAttr}>`
-      + `</picture>`
-      + `<div class="atlas-tile__veil" aria-hidden="true"></div>`
-      + `<div class="atlas-tile__caption">`
-      + `<h3 class="atlas-tile__name">${esc(loc.shortName || loc.name)}</h3>`
-      + descHtml
-      + `<div class="atlas-tile__meta">`
-      + `<span class="atlas-tile__meta-count">${esc(countLabel)}</span>`
-      + `<span class="atlas-tile__meta-cta" aria-label="View ${esc(loc.name)}">${ARROW_SVG}</span>`
-      + `</div>`
-      + `</div>`
-      + `</a>`;
+      const descHtml = loc.description
+        ? `<p class="atlas-tile__desc">${esc(loc.description)}</p>`
+        : '';
+
+      const borrowedAttr = entry._borrowed ? ' data-borrowed="true"' : '';
+      return `<a href="gallery.html#loc-${esc(loc.id)}" class="atlas-tile" data-tile="${esc(slot)}"${borrowedAttr}>`
+        + `<picture>`
+        + `<source type="image/webp" srcset="${esc(coverWebp(photo.src))}">`
+        + `<img src="${esc(imgSrc(photo.src))}" sizes="${sizes}" alt="${esc(loc.name)} — ${esc(photo.title)}" width="${photo.width}" height="${photo.height}" loading="${loading}" decoding="async"${fetchAttr}>`
+        + `</picture>`
+        + `<div class="atlas-tile__veil" aria-hidden="true"></div>`
+        + `<div class="atlas-tile__caption">`
+        + `<h3 class="atlas-tile__name">${esc(loc.shortName || loc.name)}</h3>`
+        + descHtml
+        + `<div class="atlas-tile__meta">`
+        + `<span class="atlas-tile__meta-count">${esc(countLabel)}</span>`
+        + `<span class="atlas-tile__meta-cta" aria-label="View ${esc(loc.name)}">${ARROW_SVG}</span>`
+        + `</div>`
+        + `</div>`
+        + `</a>`;
+    }).join('');
+    return `<div class="atlas__frame">${tiles}</div>`;
   }).join('');
 }
 

@@ -114,16 +114,32 @@
           <p class="atlas__lede reveal">Each place carries its own quality of light &mdash; the haze of the Gulf, the raw cold of alpine stone, the depth of a Caucasian valley.</p>
         </div>
 
-        <div class="atlas__grid" id="locations-grid">
-          <!--PRERENDER:atlas-->
-        </div>
+        <div class="atlas__stage" id="atlas-stage">
+          <button class="atlas-nav atlas-nav--prev" type="button" aria-label="Previous locations" data-dir="-1">
+            <span class="atlas-nav__glyph" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+            </span>
+          </button>
 
-        <div class="atlas-meter" aria-hidden="true">
-          <span class="atlas-meter__count"><em class="atlas-meter__current">01</em> <span class="atlas-meter__sep">/</span> <span class="atlas-meter__total">06</span></span>
-          <div class="atlas-meter__rail">
-            <div class="atlas-meter__progress"></div>
+          <div class="atlas__rail">
+            <div class="atlas__track" id="locations-grid">
+              <!--PRERENDER:atlas-->
+            </div>
           </div>
-          <span class="atlas-meter__label">Swipe</span>
+
+          <button class="atlas-nav atlas-nav--next" type="button" aria-label="Next locations" data-dir="1">
+            <span class="atlas-nav__glyph" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+          </button>
+
+          <div class="atlas-meter" aria-hidden="true">
+            <span class="atlas-meter__count"><em class="atlas-meter__current">01</em> <span class="atlas-meter__sep">/</span> <span class="atlas-meter__total">06</span></span>
+            <div class="atlas-meter__rail">
+              <div class="atlas-meter__progress"></div>
+            </div>
+            <span class="atlas-meter__label">Swipe</span>
+          </div>
         </div>
       </div>
     </section>

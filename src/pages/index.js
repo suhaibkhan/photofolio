@@ -5,12 +5,10 @@ import {
   initScrollReveal,
   initBackToTop,
 } from '../lib/shared.js';
-import {
-  initHeroSlideshow,
-  initThemesList,
-  initAtlas,
-  initFeatured,
-} from '../lib/home.js';
+import { initFeatured } from '../lib/home.js';
+import { initHeroSlideshow } from '../lib/hero-slideshow.js';
+import { initThemesCarousel } from '../lib/themes-carousel.js';
+import { initAtlas } from '../lib/atlas-grid.js';
 
 if (import.meta.env.DEV) {
   import('../lib/dev/font-switcher.js').then(m => m.init());
@@ -22,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   try {
     initHeroSlideshow(data);
-    initThemesList(data);
+    initThemesCarousel(data);
     initAtlas(data);
     initFeatured(data);
     initScrollReveal();

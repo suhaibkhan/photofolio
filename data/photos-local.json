@@ -22,13 +22,6 @@
       "cover": "images/photos/_DSC2148.jpg"
     },
     {
-      "id": "sharjah",
-      "name": "Sharjah, United Arab Emirates",
-      "shortName": "Sharjah",
-      "description": "The cultural capital where heritage meets the lagoon",
-      "cover": "images/photos/_DSC1077.jpg"
-    },
-    {
       "name": "Germany",
       "shortName": "Germany",
       "id": "germany",
@@ -41,6 +34,13 @@
       "id": "jordan",
       "description": "Ancient Nabataean rose cities and Martian desert dunes meet the salt-rich shores of the Dead Sea",
       "cover": "images/photos/DSCF0306.jpg"
+    },
+    {
+      "id": "sharjah",
+      "name": "Sharjah, United Arab Emirates",
+      "shortName": "Sharjah",
+      "description": "The cultural capital where heritage meets the lagoon",
+      "cover": "images/photos/_DSC1077.jpg"
     },
     {
       "name": "Austria",

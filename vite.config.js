@@ -22,7 +22,13 @@ export default defineConfig({
       },
       output: {
         manualChunks(id) {
-          if (id.includes('src/lib/home.js')) return 'home-app';
+          if (
+            id.includes('src/lib/home.js')
+            || id.includes('src/lib/hero-slideshow.js')
+            || id.includes('src/lib/themes-carousel.js')
+            || id.includes('src/lib/atlas-grid.js')
+            || id.includes('src/lib/atlas-utils.js')
+          ) return 'home-app';
           if (id.includes('src/lib/gallery.js')) return 'gallery-app';
           if (
             id.includes('src/lib/shared.js')
