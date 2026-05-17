@@ -91,7 +91,7 @@
   scroll-snap-align: start;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: minmax(180px, 27vh) minmax(180px, 27vh) minmax(180px, 28vh);
+  grid-template-rows: minmax(160px, 23vh) minmax(160px, 23vh) minmax(160px, 24vh);
   gap: 16px;
   transition: grid-template-rows 0.55s cubic-bezier(0.22, 1, 0.36, 1),
               grid-template-columns 0.55s cubic-bezier(0.22, 1, 0.36, 1);
@@ -102,10 +102,10 @@
 @media (min-width: 769px) and (hover: hover) {
   /* Side tiles trade row height — hero spans rows 1+2 so the swap is symmetric */
   .atlas__frame:has(.atlas-tile[data-tile="side1"]:hover) {
-    grid-template-rows: minmax(220px, 36vh) minmax(140px, 18vh) minmax(180px, 28vh);
+    grid-template-rows: minmax(200px, 31vh) minmax(120px, 15vh) minmax(160px, 24vh);
   }
   .atlas__frame:has(.atlas-tile[data-tile="side2"]:hover) {
-    grid-template-rows: minmax(140px, 18vh) minmax(220px, 36vh) minmax(180px, 28vh);
+    grid-template-rows: minmax(120px, 15vh) minmax(200px, 31vh) minmax(160px, 24vh);
   }
   /* footL expands — hero (cols 1-7) unchanged; col 8 grows, footR shrinks */
   .atlas__frame:has(.atlas-tile[data-tile="footL"]:hover) {
@@ -173,10 +173,10 @@
   width: clamp(36px, 3.4vw, 46px);
   height: clamp(36px, 3.4vw, 46px);
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.92);
   color: rgba(26, 26, 26, 0.75);
   border: 1px solid rgba(26, 26, 26, 0.15);
-  box-shadow: 0 0 28px 22px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -189,8 +189,8 @@
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
 }
-.atlas-nav--prev { left: 8px; }
-.atlas-nav--next { right: 8px; }
+.atlas-nav--prev { left: clamp(4px, 0.6vw, 8px); }
+.atlas-nav--next { right: clamp(4px, 0.6vw, 8px); }
 .atlas-nav__glyph {
   display: inline-flex;
   align-items: center;
@@ -203,6 +203,9 @@
 .atlas-nav--next:hover { transform: translateY(-50%) translateX(2px); }
 .atlas-nav.is-disabled { opacity: 0; cursor: default; pointer-events: none; }
 .atlas__stage:not(.has-overflow) .atlas-nav { opacity: 0; pointer-events: none; }
+@media (min-width: 769px) {
+  .atlas__stage { padding: 0 clamp(56px, 5.6vw, 72px); }
+}
 @media (max-width: 768px) { .atlas-nav { display: none; } }
 
 /* ---- Tile base ---- */
