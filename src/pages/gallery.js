@@ -5,10 +5,7 @@ import {
   initScrollReveal,
   initBackToTop,
 } from '../lib/shared.js';
-import {
-  initGalleryFilters,
-  initGallery,
-} from '../lib/gallery.js';
+import { initGalleryPage } from '../lib/gallery.js';
 
 if (import.meta.env.DEV) {
   import('../lib/dev/font-switcher.js').then(m => m.init());
@@ -19,8 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHeaderScroll();
 
   try {
-    initGalleryFilters(data);
-    initGallery(data);
+    initGalleryPage(data);
     initScrollReveal();
     initBackToTop();
   } catch (err) {

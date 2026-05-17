@@ -1,5 +1,5 @@
 import '../../css/home.css';
-import { imgSrc, coverWebp, heroWebp, buildLocationMap, getLocationLabel } from './shared.js';
+import { coverWebp, heroWebp, buildLocationMap, getLocationLabel } from './shared.js';
 import { createLightboxEl, initDataLightbox } from './lightbox.js';
 
 // ============================
@@ -35,7 +35,7 @@ export function initFeatured(data) {
         description: p.description || '',
         locFull: (locationMap.get(p.location) && locationMap.get(p.location).name)
           || getLocationLabel(p, locationMap) || '',
-        src: imgSrc(p.src),
+        src: p.src,
         webpCover: coverWebp(p.src),
         webpHero: heroWebp(p.src),
         width: String(p.width || ''),

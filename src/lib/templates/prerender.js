@@ -1,4 +1,4 @@
-import { imgSrc, coverWebp, heroWebp } from '../paths.js';
+import { coverWebp, heroWebp } from '../paths.js';
 import { ATLAS_PAGE_SIZE, slotsForCount, computeAtlasFrames } from '../atlas-utils.js';
 
 const ARROW_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
@@ -32,9 +32,9 @@ export function renderHeroFirstSlide(data) {
   const locationMap = buildLocationMap(data);
 
   const desktopWebp = esc(heroWebp(desktop.src));
-  const desktopJpg = esc(imgSrc(desktop.src));
+  const desktopJpg = esc(desktop.src);
   const mobileWebp = esc(heroWebp(mobile.src));
-  const mobileJpg = esc(imgSrc(mobile.src));
+  const mobileJpg = esc(mobile.src);
 
   const mobileSources = mobile !== desktop
     ? `<source type="image/webp" media="(max-width: 768px)" srcset="${mobileWebp}">`
@@ -102,7 +102,7 @@ export function renderAtlasHtml(data) {
       return `<a href="gallery.html#loc-${esc(loc.id)}" class="atlas-tile" data-tile="${esc(slot)}"${borrowedAttr}>`
         + `<picture>`
         + `<source type="image/webp" srcset="${esc(coverWebp(photo.src))}">`
-        + `<img src="${esc(imgSrc(photo.src))}" sizes="${sizes}" alt="${esc(loc.name)} — ${esc(photo.title)}" width="${photo.width}" height="${photo.height}" loading="${loading}" decoding="async"${fetchAttr}>`
+        + `<img src="${esc(photo.src)}" sizes="${sizes}" alt="${esc(loc.name)} — ${esc(photo.title)}" width="${photo.width}" height="${photo.height}" loading="${loading}" decoding="async"${fetchAttr}>`
         + `</picture>`
         + `<div class="atlas-tile__veil" aria-hidden="true"></div>`
         + `<div class="atlas-tile__caption">`
@@ -147,7 +147,7 @@ export function renderFeaturedHtml(data) {
       + ` data-description="${esc(p.description)}"`
       + ` data-loc-tag="${esc((locShort || '').toUpperCase())}"`
       + ` data-loc-full="${esc(locFull)}"`
-      + ` data-src="${esc(imgSrc(p.src))}"`
+      + ` data-src="${esc(p.src)}"`
       + ` data-webp-cover="${esc(coverWebp(p.src))}"`
       + ` data-webp-hero="${esc(heroWebp(p.src))}"`
       + ` data-width="${p.width}"`
@@ -164,7 +164,7 @@ export function renderFeaturedHtml(data) {
     return `<a href="${esc(galleryUrlForPhoto(p, photos))}" class="featured__thumb${activeClass}" aria-label="Show ${esc(p.title)} in featured frame"${ariaCurrent}${dataAttrs(p)}>`
       + `<picture>`
       + `<source type="image/webp" srcset="${esc(coverWebp(p.src))}">`
-      + `<img src="${esc(imgSrc(p.src))}" alt="${esc(p.title)}" width="${p.width}" height="${p.height}" loading="lazy" decoding="async">`
+      + `<img src="${esc(p.src)}" alt="${esc(p.title)}" width="${p.width}" height="${p.height}" loading="lazy" decoding="async">`
       + `</picture>`
       + `<span class="featured__thumb-frame" aria-hidden="true"></span>`
       + `</a>`;
@@ -201,7 +201,7 @@ export function renderFeaturedHtml(data) {
     + `<a href="${esc(mainUrl)}" class="featured__main" aria-label="View ${esc(main.title)}"${dataAttrs(main)}>`
     + `<picture>`
     + `<source type="image/webp" srcset="${esc(heroWebp(main.src))}">`
-    + `<img src="${esc(imgSrc(main.src))}" sizes="(max-width: 1024px) 100vw, 60vw" alt="${esc(main.title)}" width="${main.width}" height="${main.height}" loading="lazy" decoding="async">`
+    + `<img src="${esc(main.src)}" sizes="(max-width: 1024px) 100vw, 60vw" alt="${esc(main.title)}" width="${main.width}" height="${main.height}" loading="lazy" decoding="async">`
     + `</picture>`
     + `</a>`
     + thumbsBlock
@@ -227,7 +227,7 @@ export function renderThemesHtml(data) {
     return `<a href="gallery.html#${esc(cat.id)}" class="plate" data-idx="${i}" role="listitem">`
       + `<picture>`
       + `<source type="image/webp" srcset="${esc(coverWebp(photo.src))}">`
-      + `<img class="plate__img" src="${esc(imgSrc(photo.src))}" sizes="(max-width: 768px) 80vw, 36vw" alt="${esc(cat.name)} photographs" width="${photo.width}" height="${photo.height}" loading="${loading}" decoding="async"${fetchAttr}>`
+      + `<img class="plate__img" src="${esc(photo.src)}" sizes="(max-width: 768px) 80vw, 36vw" alt="${esc(cat.name)} photographs" width="${photo.width}" height="${photo.height}" loading="${loading}" decoding="async"${fetchAttr}>`
       + `</picture>`
       + `<div class="plate__veil" aria-hidden="true"></div>`
       + `<div class="plate__caption">`

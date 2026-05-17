@@ -1,7 +1,3 @@
-export function imgSrc(base) {
-  return base;
-}
-
 export function coverWebp(src) {
   return swapToWebp(src, '/covers');
 }

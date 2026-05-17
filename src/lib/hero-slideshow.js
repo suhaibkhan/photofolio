@@ -1,5 +1,5 @@
 import '../../css/hero-slideshow.css';
-import { imgSrc, heroWebp, buildLocationMap, getLocationLabel } from './shared.js';
+import { heroWebp, buildLocationMap, getLocationLabel } from './shared.js';
 
 export function initHeroSlideshow(data) {
   const container = document.querySelector('.hero__slides');
@@ -48,10 +48,10 @@ export function initHeroSlideshow(data) {
     if (i === 0) {
       img.fetchPriority = 'high';
       webpSource.srcset = heroWebp(photo.src);
-      img.src = imgSrc(photo.src);
+      img.src = photo.src;
     } else {
       webpSource.dataset.srcset = heroWebp(photo.src);
-      img.dataset.src = imgSrc(photo.src);
+      img.dataset.src = photo.src;
     }
 
     picture.appendChild(img);

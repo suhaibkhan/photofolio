@@ -1,5 +1,5 @@
 import '../../css/atlas-grid.css';
-import { imgSrc, coverWebp } from './paths.js';
+import { coverWebp } from './paths.js';
 import { ATLAS_PAGE_SIZE, ATLAS_SLOTS, slotsForCount, computeAtlasFrames } from './atlas-utils.js';
 
 const ARROW_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
@@ -20,7 +20,7 @@ function buildAtlasTile(entry, slot, globalIdx, photos) {
   picture.appendChild(webpSource);
 
   const img = document.createElement('img');
-  img.src = imgSrc(entry.photo.src);
+  img.src = entry.photo.src;
   img.sizes = isHero
     ? '(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 60vw'
     : '(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 30vw';

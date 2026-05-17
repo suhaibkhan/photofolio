@@ -1,5 +1,5 @@
 import '../../css/gallery.css';
-import { imgSrc, coverWebp, buildLocationMap } from './shared.js';
+import { coverWebp, buildLocationMap } from './shared.js';
 import { createLightboxEl, initLightbox } from './lightbox.js';
 
 function stripPhotoFromHash(h) {
@@ -206,7 +206,7 @@ export function initGalleryPage(data) {
       picture.appendChild(webpSource);
 
       const img = document.createElement('img');
-      const fullSrc = imgSrc(photo.src);
+      const fullSrc = photo.src;
       const webpSrc = coverWebp(photo.src);
       img.sizes = '(max-width: 480px) 100vw, (max-width: 1024px) 50vw, 33vw';
       img.alt = photo.title;
@@ -344,12 +344,4 @@ export function initGalleryPage(data) {
   });
 }
 
-// Backwards-compatible exports — gallery page now uses initGalleryPage
-export function initGalleryFilters(data) {
-  initGalleryPage(data);
-}
-
-export function initGallery(_data) {
-  // no-op: handled by initGalleryPage
-}
 

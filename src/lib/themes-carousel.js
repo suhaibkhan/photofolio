@@ -1,5 +1,5 @@
 import '../../css/themes-carousel.css';
-import { imgSrc, coverWebp } from './paths.js';
+import { coverWebp } from './paths.js';
 
 export function initThemesCarousel(data) {
   const track = document.getElementById('categories-grid');
@@ -40,7 +40,7 @@ export function initThemesCarousel(data) {
 
       const img = document.createElement('img');
       img.className = 'plate__img';
-      img.src = imgSrc(photo.src);
+      img.src = photo.src;
       img.sizes = '(max-width: 768px) 80vw, 36vw';
       img.alt = `${cat.name} photographs`;
       img.width = photo.width;

@@ -516,7 +516,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .themes-strip {
+  .themes-stage {
     opacity: 1;
     transform: none;
     transition-delay: 0s !important;

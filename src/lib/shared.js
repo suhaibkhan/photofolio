@@ -1,8 +1,8 @@
 import '../../css/base.css';
 import data from '../../data/photos-local.json';
-import { imgSrc, coverWebp, heroWebp } from './paths.js';
+import { coverWebp, heroWebp } from './paths.js';
 
-export { data, imgSrc, coverWebp, heroWebp };
+export { data, coverWebp, heroWebp };
 
 export function buildLocationMap(data) {
   return new Map((data.locations || []).map((loc) => [loc.id, loc]));
